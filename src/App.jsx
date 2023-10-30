@@ -11,6 +11,7 @@ import CreateMethodPage from './pages/method/CreateMethodPage'
 import UpdateMethodPage from './pages/method/UpdateMethodPage'
 import DeleteMethodPage from './pages/method/DeleteMethodPage'
 import ViewExpensesPage from './pages/expense/ViewExpensesPage'
+import CreateExpensePage from './pages/expense/CreateExpensePage'
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
               <Route path="/method/delete/:id" element={<DeleteMethodPage/>}/>
 
               <Route path="/expense" element={<ViewExpensesPage/>}/>
+              <Route path="/expense/create" element={<CreateExpensePage/>}/>
 
           </Routes>
       </div>

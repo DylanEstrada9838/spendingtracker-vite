@@ -45,10 +45,6 @@ const Navbar = ()=>{
                 </Link >
                 </ul>
               </li>
-
-
-                
-                
             </ul>
           </div>
         </div>
