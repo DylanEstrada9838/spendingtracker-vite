@@ -41,7 +41,7 @@ const Create = ({element})=>{
       }, 1500);
     }).catch((error)=>{
         console.log(error)
-        setMessage(`Not created succesfully, ${element} may already exist`)
+        setMessage(error.response.data.message)
         setIsError(true)
     })
   }

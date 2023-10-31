@@ -24,7 +24,7 @@ const Delete= ({element})=>{
       }, 1500);
     }).catch((error)=>{
         console.log(error)
-        setMessage("Record not deleted succesfully or record does not exist")
+        setMessage(error.response.data.message)
         setIsError(true)
     })
   }
