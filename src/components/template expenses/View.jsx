@@ -1,6 +1,8 @@
 import { useState,useEffect } from 'react'
 import {Link,useNavigate} from 'react-router-dom'
 import Axios from 'axios';
+import ButtonCreate from '../ButtonCreate'
+import PieChartExpense from './PieChart';
 
 const View = ({element})=>{
   const [view, setView] = useState([])
@@ -28,6 +30,7 @@ const View = ({element})=>{
           Add {`${element}`} <i class="bi bi-plus"></i>
         </button>
         </Link>
+        <ButtonCreate element={element}/>
       <table class="table">
       <thead>
         <tr>
@@ -66,6 +69,7 @@ const View = ({element})=>{
             )}
       </tbody>
       </table>
+      <PieChartExpense element="category"/>
     </div>
   );
 };

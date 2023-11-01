@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom'
 const Navbar = ()=>{
     return(
-        <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+        <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
         <div class="container-fluid">
             <Link to={`/`}>
             <a class="navbar-brand"><i class="bi bi-cash-coin"> Expense Tracker  </i></a>
@@ -53,3 +53,4 @@ const Navbar = ()=>{
 }
 ;
 export default Navbar;
+

@@ -1,6 +1,10 @@
 import { useState,useEffect } from 'react'
 import Axios from 'axios';
 import {useNavigate } from 'react-router-dom';
+import ButtonSubmit from '../ButtonSubmit';
+import ButtonCancel from '../ButtonCancel';
+import Button from '@mui/material/Button';
+
 const Create = ({element})=>{
   const [name, setName] = useState('')
   const [message, setMessage] = useState('');
@@ -26,7 +30,6 @@ const Create = ({element})=>{
         navigate(`/${element}`, { replace: true });
       }, 1500);
     }).catch((error)=>{
-        console.log(error)
         setMessage(error.response.data.message)
         setIsError(true)
     })
@@ -41,10 +44,15 @@ const Create = ({element})=>{
             onChange={handleChange}/>
             <label for="name">New {`${element}`} name</label>
         </div>
-        <button class="btn btn-primary" type="submit">Add {`${element}`} <i class="bi bi-check2"></i> </button>
+        <ButtonSubmit/>
+        <button class="btn btn-primary" type="submit">Submit </button>
         {isError ?<p style={{color:"red"}}>{message}</p> :<p style={{color:"green"}}>{message}</p> }
       </form>
+      <Button onClick={()=>navigate(`/${element}`, { replace: true })} variant="contained" color="secondary">
+          Cancel
+        </Button>
       <button class="btn btn-danger" onClick={()=>navigate(`/${element}`, { replace: true })}>Cancel</button>
+      
     </div>
   );
 };
