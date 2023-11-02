@@ -1,9 +1,10 @@
 import { useState,useEffect } from 'react'
 import {Link,useNavigate} from 'react-router-dom'
 import Axios from 'axios';
-import ButtonCreate from '../ButtonCreate'
+import Create from './Create';
 import PieChartExpense from '../template expenses/PieChart';
 import BasicTable from './TableMui';
+import CreateMui from './CreateMui';
 
 const ViewMui= ({element,id})=>{
   const [view, setView] = useState([])
@@ -24,7 +25,7 @@ const ViewMui= ({element,id})=>{
 
   return (
     <div>
-        <ButtonCreate element={element}/>
+        <CreateMui element={element}/>
         <BasicTable element={element} rows={view.map(item => ({ name: item.name }))} />
         
         <PieChartExpense element={element} id={id}  value='totalAmount'/>

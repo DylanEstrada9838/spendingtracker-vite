@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 
 const ButtonCancel=({fn})=> {
   return (
-        <Button onClick={fn} variant="contained" color="secondary">
+        <Button  variant="contained" color="secondary" onClick={fn}>
           Cancel
         </Button>
   );

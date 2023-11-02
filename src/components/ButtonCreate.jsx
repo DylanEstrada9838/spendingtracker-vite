@@ -4,15 +4,14 @@ import {Link} from 'react-router-dom'
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 
-const ButtonCreate=({element})=> {
+export default function ButtonCreate({element,fn}) {
+ 
   return (
-      <Link to={`/${element}/create`}>
-        <Fab variant="extended" color="primary">
+    
+       <Fab variant="extended" color="primary" onClick={fn}>
           <AddIcon sx={{ mr: 1 }} />
           {element}
         </Fab>
-      </Link>
   );
 }
 
-export default ButtonCreate;
