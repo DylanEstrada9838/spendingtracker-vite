@@ -25,11 +25,6 @@ const View = ({element})=>{
 
   return (
     <div>
-      <Link to={`create`}>
-        <button class="btn btn-primary">
-          Add {`${element}`} <i class="bi bi-plus"></i>
-        </button>
-        </Link>
         <ButtonCreate element={element}/>
       <table class="table">
       <thead>
@@ -43,10 +38,7 @@ const View = ({element})=>{
       <tbody>
       {view.map((elem) => 
       <tr key={elem.id}>
-          <td> $ {elem.amount} <div class="dropdown" style={{display:'inline'}}>
-                    
-                </div>
-            </td>
+          <td> $ {elem.amount.toFixed(2)} <div class="dropdown" style={{display:'inline'}}></div></td>
             <td>{elem.category.name}</td>
             <td>{elem.method.name}</td>
             <td>
@@ -69,7 +61,6 @@ const View = ({element})=>{
             )}
       </tbody>
       </table>
-      <PieChartExpense element="category"/>
     </div>
   );
 };

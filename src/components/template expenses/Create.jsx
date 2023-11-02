@@ -1,6 +1,8 @@
 import { useState,useEffect } from 'react'
 import Axios from 'axios';
 import {useNavigate } from 'react-router-dom';
+import ButtonSubmit from '../ButtonSubmit';
+import ButtonCancel from '../ButtonCancel';
 const Create = ({element})=>{
   const [amount, setAmount] = useState('')
   const [description, setDescription] = useState('')
@@ -114,11 +116,10 @@ const Create = ({element})=>{
             </option>
           ))}
         </select>
-
-        <button class="btn btn-primary" type="submit">Add {`${element}`} <i class="bi bi-check2"></i> </button>
+        <ButtonSubmit element={element}/>
         {isError ?<p style={{color:"red"}}>{message}</p> :<p style={{color:"green"}}>{message}</p> }
       </form>
-      <button class="btn btn-danger" onClick={()=>navigate(`/${element}`, { replace: true })}>Cancel</button>
+      <ButtonCancel fn={()=>navigate(`/${element}`, { replace: true })}/>
     </div>
   );
 };

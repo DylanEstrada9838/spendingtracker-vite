@@ -5,7 +5,7 @@ import Axios from 'axios';
 import * as React from 'react';
 import { PieChart } from '@mui/x-charts/PieChart';
 
-const PieChartExpense= ({element})=>{
+const PieChartExpense= ({element,id,value})=>{
   const [view, setView] = useState([])
   
   const fetchView = ()=>{
@@ -29,9 +29,9 @@ const PieChartExpense= ({element})=>{
       series={[
         {
           data: view.map(item => ({
-            id: item.CategoryId,
-            value: item.totalAmount,
-            label: item.category.name
+            id: item[id],
+            value: item[value],
+            label: item[element].name
         }))
         },
       ]}

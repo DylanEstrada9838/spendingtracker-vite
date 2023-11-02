@@ -1,6 +1,5 @@
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
 import './styles/App.css' 
-import Navbar from './components/Navbar'
 import ResponsiveAppBar from './components/NavBarMui'
 import ViewCategoriesPage from './pages/category/ViewCategoriesPage'
 import CreateCategoryPage from './pages/category/CreateCategoryPage'
@@ -18,7 +17,6 @@ function App() {
   return (
     <BrowserRouter>
     <div>
-      <Navbar/>
       <ResponsiveAppBar/>
       <div>
           <Routes>

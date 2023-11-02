@@ -1,9 +1,9 @@
-import View from '../../components/template/View';
+import ViewMui from '../../components/template/ViewMui';
 const ViewMethodsPage= ()=>{
 
   return (
     <div>
-        <View element='method'/>
+        <ViewMui element='method' id='MethodId'/>
     </div>
   );
 };

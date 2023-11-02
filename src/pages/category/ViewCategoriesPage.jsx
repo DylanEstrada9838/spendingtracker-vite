@@ -1,9 +1,9 @@
-import View from '../../components/template/View';
+import ViewMui from '../../components/template/ViewMui';
 
 const ViewCategoriesPage = ()=>{
   return (
     <div>
-        <View element='category'/>
+        <ViewMui element='category'id='CategoryId'/>
     </div>
   );
 };

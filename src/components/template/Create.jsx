@@ -3,7 +3,7 @@ import Axios from 'axios';
 import {useNavigate } from 'react-router-dom';
 import ButtonSubmit from '../ButtonSubmit';
 import ButtonCancel from '../ButtonCancel';
-import Button from '@mui/material/Button';
+
 
 const Create = ({element})=>{
   const [name, setName] = useState('')
@@ -45,14 +45,9 @@ const Create = ({element})=>{
             <label for="name">New {`${element}`} name</label>
         </div>
         <ButtonSubmit/>
-        <button class="btn btn-primary" type="submit">Submit </button>
         {isError ?<p style={{color:"red"}}>{message}</p> :<p style={{color:"green"}}>{message}</p> }
       </form>
-      <Button onClick={()=>navigate(`/${element}`, { replace: true })} variant="contained" color="secondary">
-          Cancel
-        </Button>
-      <button class="btn btn-danger" onClick={()=>navigate(`/${element}`, { replace: true })}>Cancel</button>
-      
+        <ButtonCancel fn={()=>navigate(`/${element}`, { replace: true })}/>
     </div>
   );
 };
