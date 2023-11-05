@@ -1,9 +1,9 @@
-import View from '../../components/template expenses/View';
+import View from "../../components/template expenses/View";
 
-const ViewExpensesPage = ()=>{
+const ViewExpensesPage = () => {
   return (
     <div>
-        <View element='expense'/>
+      <View element="expense" />
     </div>
   );
 };

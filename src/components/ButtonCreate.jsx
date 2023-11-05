@@ -1,17 +1,14 @@
-import * as React from 'react';
-import {Link} from 'react-router-dom'
+import * as React from "react";
+import { Link } from "react-router-dom";
 
-import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
+import Fab from "@mui/material/Fab";
+import AddIcon from "@mui/icons-material/Add";
 
-export default function ButtonCreate({element,fn}) {
- 
+export default function ButtonCreate({ element, fn }) {
   return (
-    
-       <Fab variant="extended" color="primary" onClick={fn}>
-          <AddIcon sx={{ mr: 1 }} />
-          {element}
-        </Fab>
+    <Fab variant="extended" color="primary" onClick={fn}>
+      <AddIcon sx={{ mr: 1 }} />
+      {element}
+    </Fab>
   );
 }
-

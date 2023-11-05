@@ -1,0 +1,12 @@
+.table-scrollable {
+    width:30%;
+    overflow:auto;
+}
+
+@media (max-width: 800px) {
+
+    .table-scrollable{
+        width:50%;
+        overflow:auto;
+    }
+}

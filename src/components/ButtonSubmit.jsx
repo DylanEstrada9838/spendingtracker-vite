@@ -1,16 +1,13 @@
-import * as React from 'react';
-import CheckIcon from '@mui/icons-material/Check';
+import * as React from "react";
+import CheckIcon from "@mui/icons-material/Check";
+import Button from "@mui/material/Button";
 
-
-import Button from '@mui/material/Button';
-
-const ButtonSubmit=()=> {
+const ButtonSubmit = () => {
   return (
-      
-        <Button variant="contained" color="primary" type="submit">
-          <CheckIcon/>
-        </Button>  
+    <Button variant="contained" color="primary" type="submit">
+      <CheckIcon />
+    </Button>
   );
-}
+};
 
 export default ButtonSubmit;
