@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
   const [name, setName] = useState("");
@@ -28,7 +29,7 @@ export default function SignUp() {
     setPassword(e.target.value);
   };
 
-
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -44,7 +45,7 @@ export default function SignUp() {
             setShow(false) // Refresh the page after the delay
           }, 1500);
         setTimeout(function() {
-            location.reload(); // Refresh the page after the delay
+            navigate("/sign-in") // Refresh the page after the delay
           }, 2000);
       })
       .catch((error) => {

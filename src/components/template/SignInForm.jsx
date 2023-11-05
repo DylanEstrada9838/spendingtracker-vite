@@ -9,6 +9,9 @@ import { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -16,6 +19,7 @@ export default function SignUp() {
   const [message, setMessage] = useState("");
   const [isError, setIsError] = useState(false);
   const [show,setShow]=useState(false);
+  const navigate = useNavigate();
 
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
@@ -33,15 +37,16 @@ export default function SignUp() {
       { email:email,password:password },
     )
       .then((response) => {
-        setMessage("Created succesfully");
+        console.log(response.data.token)
+        setMessage("Logged in succesfully");
         setIsError(false);
         setShow(true)
         setTimeout(function() {
             setShow(false) // Refresh the page after the delay
           }, 1500);
         setTimeout(function() {
-            location.reload(); // Refresh the page after the delay
-          }, 2000);
+         navigate("/") // Refresh the page after the delay
+           }, 2000);
       })
       .catch((error) => {
         setMessage(error.response.data.message);
@@ -99,6 +104,9 @@ export default function SignUp() {
                 </Alert>
               </Stack>
             ))}
+            <Link to="/sign-up">
+                <p style={{color:'blue'}}>Don't have an account? Sign-Up</p>
+            </Link>
     </Box>
   );
 }
