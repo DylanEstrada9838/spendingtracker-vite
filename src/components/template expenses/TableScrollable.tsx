@@ -15,7 +15,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function StickyHeadTable({ rows, element }) {
   interface Column {
-    id: typeof element | "actions";
+    id: typeof element |"category"|"method"|"actions";
     label: string;
     minWidth?: number;
     align?: "right";
@@ -24,6 +24,8 @@ export default function StickyHeadTable({ rows, element }) {
 
   const columns: readonly Column[] = [
     { id: element, label: capitalizeFirstLetter(element), minWidth: 170 },
+    { id: "category", label: "Category", minWidth: 50 },
+    { id: "method", label: "Method", minWidth: 50 },
     { id: "actions", label: "Actions", minWidth: 50 },
   ];
 
@@ -67,8 +69,8 @@ export default function StickyHeadTable({ rows, element }) {
                     {columns.map((column, columnIndex) => {
                       const value = row[column.id];
                       return (
-                        <TableCell key={column.id} align={column.align} style={{ position: "relative", zIndex: 1 }}>
-                          {columnIndex === 1 ? ( // Check if it's the second column
+                        <TableCell key={column.id} align={column.align}>
+                          {columnIndex === 3 ? ( // Check if it's the second column
                             <div style={{ display: "flex", gap: "1em" }}>
                               <Fab
                                 size="small"

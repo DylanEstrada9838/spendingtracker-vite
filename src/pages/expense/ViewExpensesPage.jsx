@@ -1,9 +1,9 @@
-import View from "../../components/template expenses/View";
+import ViewMui from "../../components/template expenses/ViewMui";
 
 const ViewExpensesPage = () => {
   return (
     <div>
-      <View element="expense" />
+      <ViewMui element="expense" />
     </div>
   );
 };

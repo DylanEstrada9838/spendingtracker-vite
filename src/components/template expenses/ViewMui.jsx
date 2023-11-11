@@ -3,8 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
 import Create from "./Create";
 import PieChartExpense from "../template expenses/PieChart";
-import BasicTable from "./TableMui";
-import CreateMui from "./CreateMui";
+//import CreateMui from "./CreateMui";
 import StickyHeadTable from "./TableScrollable";
 import "../../styles/ViewMui.css";
 import tokenInterceptor from "../../functions/tokenInterceptor";
@@ -27,13 +26,17 @@ const ViewMui = ({ element, id }) => {
 
   return (
     <div>
-      <CreateMui element={element} />
-      <div class="view-mui">
+       {/* <CreateMui element={element} /> */}
+      <div class="view-mui"> 
         <StickyHeadTable
           element={element}
-          rows={view.map((item) => ({ id: item.id, [element]: item.name }))}
+          rows={view.map((item) => ({ id: item.id, [element]: item.amount.toFixed(2),
+            category: item.category.name,
+            method: item.method.name }))}
         />
-        <PieChartExpense element={element} id={id} value="totalAmount" />
+        <PieChartExpense element={"category"} id={id} value="totalAmount" />
+        <PieChartExpense element={"method"} id={id} value="totalAmount" />
+
       </div>
     </div>
   );
