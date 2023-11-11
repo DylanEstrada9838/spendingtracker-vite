@@ -39,6 +39,7 @@ function App() {
 
             <Route path="/expense" element={<ViewExpensesPage />} />
             <Route path="/expense/create" element={<CreateExpensePage />} />
+
           </Routes>
         </div>
       </div>

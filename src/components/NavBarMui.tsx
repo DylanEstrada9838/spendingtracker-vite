@@ -13,10 +13,12 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import PaymentsIcon from "@mui/icons-material/Payments";
 import { Link } from "react-router-dom";
+import logout from "../functions/logout"
+import { useNavigate } from "react-router-dom";
 
 const links = ["expense", "category", "method"];
 const pages = ["Expenses", "Categories", "Methods"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = ["Account", "Logout"];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -25,7 +27,7 @@ function ResponsiveAppBar() {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
-
+  const navigate = useNavigate();
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -40,6 +42,13 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  const handleLogout = () => {
+    // Call the logout function when the user logs out
+    logout();
+    navigate("/sign-in")
+  };
+
+  
 
   return (
     <AppBar position="static">
@@ -171,11 +180,19 @@ function ResponsiveAppBar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center" className="nav">
-                    {setting}
-                  </Typography>
-                </MenuItem>
+                setting === "Logout" ? (
+                  <MenuItem key={setting} onClick={handleLogout}>
+                    <Typography textAlign="center" className="nav">
+                      {setting}
+                    </Typography>
+                  </MenuItem>
+                ) : (
+                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center" className="nav">
+                      {setting}
+                    </Typography>
+                  </MenuItem>
+                )
               ))}
             </Menu>
           </Box>

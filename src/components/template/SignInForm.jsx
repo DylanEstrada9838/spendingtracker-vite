@@ -37,7 +37,11 @@ export default function SignUp() {
       { email:email,password:password },
     )
       .then((response) => {
-        console.log(response.data.token)
+        const token = response.data.token;
+        console.log(token);
+
+      // Save the token to local storage
+      localStorage.setItem('token', token);
         setMessage("Logged in succesfully");
         setIsError(false);
         setShow(true)

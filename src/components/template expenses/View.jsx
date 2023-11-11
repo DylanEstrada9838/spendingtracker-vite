@@ -17,7 +17,7 @@ const View = ({ element }) => {
       },
     }).then((response) => {
       setView(response.data);
-      console.log(view);
+      
     });
   };
 

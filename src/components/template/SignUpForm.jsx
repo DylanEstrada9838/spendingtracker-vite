@@ -10,6 +10,7 @@ import Button from "@mui/material/Button";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function SignUp() {
   const [name, setName] = useState("");
@@ -93,6 +94,9 @@ export default function SignUp() {
       Sign Up
     </Button>
      </form>
+     <Link to="/sign-in">
+                <p style={{color:'blue'}}>Already have an account? Sign-In</p>
+            </Link>
      {show &&(isError ? (
               <Stack sx={{ width: "100%" }} spacing={2}>
                 <Alert variant="filled" severity="error">
