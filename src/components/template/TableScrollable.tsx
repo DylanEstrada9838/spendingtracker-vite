@@ -13,6 +13,7 @@ import Fab from "@mui/material/Fab";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import UpdateModal from "./UpdateModal";
+import DeleteModal from "./DeleteModal";
 
 export default function StickyHeadTable({ rows, element }) {
   interface Column {
@@ -72,9 +73,7 @@ export default function StickyHeadTable({ rows, element }) {
                           {columnIndex === 1 ? ( // Check if it's the second column
                             <div style={{ display: "flex", gap: "1em" }}>
                               <UpdateModal element={element} id= {row.id}/>
-                              <Fab size="small" color="error" aria-label="add">
-                                <DeleteIcon />
-                              </Fab>
+                              <DeleteModal element={element} id= {row.id}/>
                             </div>
                           ) : // Render the value from the data for other columns
                           column.format && typeof value === "number" ? (
