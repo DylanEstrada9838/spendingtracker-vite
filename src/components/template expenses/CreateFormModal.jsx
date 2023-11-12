@@ -102,10 +102,17 @@ export default function CreateFormModal({ element, fn }) {
           onChange={handleChangeAmount}
         />
         <TextField
+          label={`Description(Optional)`}
+          id="description"
+          size="small"
+          value={description}
+          onChange={handleChangeDescription}
+        />
+        <TextField
           id="category"
           select
           label="Select"
-          defaultValue=""
+          size="small"
           helperText="Please select a category"
           value={categoryId}
           onChange={handleChangeCategoryId}
@@ -120,6 +127,7 @@ export default function CreateFormModal({ element, fn }) {
           id="method"
           select
           label="Select"
+          size="small"
           helperText="Please select a method"
           value={methodId}
           onChange={handleChangeMethodId}

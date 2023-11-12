@@ -49,7 +49,9 @@ export default function SignUp() {
             setShow(false) // Refresh the page after the delay
           }, 1500);
         setTimeout(function() {
+         
          navigate("/") // Refresh the page after the delay
+         location.reload() 
            }, 2000);
       })
       .catch((error) => {

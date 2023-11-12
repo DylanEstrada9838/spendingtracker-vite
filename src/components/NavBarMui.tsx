@@ -45,7 +45,9 @@ function ResponsiveAppBar() {
   const handleLogout = () => {
     // Call the logout function when the user logs out
     logout();
+    
     navigate("/sign-in")
+    location.reload()
   };
 
   
