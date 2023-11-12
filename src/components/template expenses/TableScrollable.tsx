@@ -69,7 +69,7 @@ export default function StickyHeadTable({ rows, element }) {
                     {columns.map((column, columnIndex) => {
                       const value = row[column.id];
                       return (
-                        <TableCell key={column.id} align={column.align}>
+                        <TableCell key={column.id} align={column.align} style={{ position: "relative", zIndex: 1 }}>
                           {columnIndex === 3 ? ( // Check if it's the second column
                             <div style={{ display: "flex", gap: "1em" }}>
                               <Fab

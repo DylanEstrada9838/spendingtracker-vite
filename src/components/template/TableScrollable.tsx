@@ -12,6 +12,7 @@ import "../../styles/ViewMui.css";
 import Fab from "@mui/material/Fab";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import UpdateModal from "./UpdateModal";
 
 export default function StickyHeadTable({ rows, element }) {
   interface Column {
@@ -70,13 +71,7 @@ export default function StickyHeadTable({ rows, element }) {
                         <TableCell key={column.id} align={column.align} style={{ position: "relative", zIndex: 1 }}>
                           {columnIndex === 1 ? ( // Check if it's the second column
                             <div style={{ display: "flex", gap: "1em" }}>
-                              <Fab
-                                size="small"
-                                color="secondary"
-                                aria-label="add"
-                              >
-                                <EditIcon />
-                              </Fab>
+                              <UpdateModal element={element} id= {row.id}/>
                               <Fab size="small" color="error" aria-label="add">
                                 <DeleteIcon />
                               </Fab>

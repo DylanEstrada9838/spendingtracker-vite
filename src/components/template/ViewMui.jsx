@@ -8,10 +8,12 @@ import CreateMui from "./CreateMui";
 import StickyHeadTable from "./TableScrollable";
 import "../../styles/ViewMui.css";
 import tokenInterceptor from "../../functions/tokenInterceptor";
+import BasicModal from "./CreateModal";
+
 
 const ViewMui = ({ element, id }) => {
   const [view, setView] = useState([]);
-  
+
   tokenInterceptor();
 
   const fetchView = () => {
@@ -27,7 +29,7 @@ const ViewMui = ({ element, id }) => {
 
   return (
     <div>
-      <CreateMui element={element} />
+      <BasicModal element={element}/>
       <div class="view-mui">
         <StickyHeadTable
           element={element}
