@@ -60,7 +60,7 @@ export default function UpdateFormModal({element,fn,id}) {
               style={{ display: "flex", gap: "1em" }}
             >
               <TextField
-                label={`Update ${element}`}
+                label={`New ${element} name`}
                 id="outlined-size-small"
                 size="small"
                 value={name}

@@ -39,7 +39,7 @@ export default function UpdateModal({element,id}) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Update {element}
+            Edit {element}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
               <UpdateFormModal element={element} fn={handleClose} id={id}/>

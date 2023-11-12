@@ -7,6 +7,7 @@ import PieChartExpense from "../template expenses/PieChart";
 import StickyHeadTable from "./TableScrollable";
 import "../../styles/ViewMui.css";
 import tokenInterceptor from "../../functions/tokenInterceptor";
+import CreateModal from "./CreateModal";
 
 const ViewMui = ({ element, id }) => {
   const [view, setView] = useState([]);
@@ -26,7 +27,7 @@ const ViewMui = ({ element, id }) => {
 
   return (
     <div>
-       {/* <CreateMui element={element} /> */}
+       <CreateModal element={element}/>
       <div class="view-mui"> 
         <StickyHeadTable
           element={element}
