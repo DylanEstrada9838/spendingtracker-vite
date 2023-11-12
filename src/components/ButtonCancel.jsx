@@ -1,16 +1,12 @@
-import * as React from 'react';
+import * as React from "react";
+import Button from "@mui/material/Button";
 
-
-import Button from '@mui/material/Button';
-
-
-const ButtonCancel=({fn})=> {
+const ButtonCancel = ({ fn }) => {
   return (
-        <Button  variant="contained" color="secondary" onClick={fn}>
-          Cancel
-        </Button>
+    <Button variant="contained" color="secondary" onClick={fn}>
+      Cancel
+    </Button>
   );
-}
-
+};
 
 export default ButtonCancel;

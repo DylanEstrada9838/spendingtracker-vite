@@ -1,31 +1,30 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import CreateFormModal from './CreateFormModal';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+import CreateFormModal from "./CreateFormModal";
 import ButtonCreate from "../ButtonCreate";
 
-
 const style = {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute" as "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
+  bgcolor: "background.paper",
+  border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
 
-export default function CreateModal({element}) {
+export default function CreateModal({ element }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  
+
   return (
     <div>
-      <ButtonCreate element = {element} fn={handleOpen}/>
+      <ButtonCreate element={element} fn={handleOpen} />
       <Modal
         open={open}
         onClose={handleClose}
@@ -37,7 +36,7 @@ export default function CreateModal({element}) {
             Create {element}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              <CreateFormModal element={element} fn={handleClose}/>
+            <CreateFormModal element={element} fn={handleClose} />
           </Typography>
         </Box>
       </Modal>

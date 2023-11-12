@@ -13,7 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import PaymentsIcon from "@mui/icons-material/Payments";
 import { Link } from "react-router-dom";
-import logout from "../functions/logout"
+import logout from "../functions/logout";
 import { useNavigate } from "react-router-dom";
 
 const links = ["expense", "category", "method"];
@@ -45,12 +45,10 @@ function ResponsiveAppBar() {
   const handleLogout = () => {
     // Call the logout function when the user logs out
     logout();
-    
-    navigate("/sign-in")
-    location.reload()
-  };
 
-  
+    navigate("/sign-in");
+    location.reload();
+  };
 
   return (
     <AppBar position="static">
@@ -181,7 +179,7 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
+              {settings.map((setting) =>
                 setting === "Logout" ? (
                   <MenuItem key={setting} onClick={handleLogout}>
                     <Typography textAlign="center" className="nav">
@@ -195,7 +193,7 @@ function ResponsiveAppBar() {
                     </Typography>
                   </MenuItem>
                 )
-              ))}
+              )}
             </Menu>
           </Box>
         </Toolbar>

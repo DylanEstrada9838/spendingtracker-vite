@@ -1,8 +1,5 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Alert from "@mui/material/Alert";
@@ -11,7 +8,7 @@ import tokenInterceptor from "../../functions/tokenInterceptor";
 import { useState, useEffect } from "react";
 import ButtonSubmit from "../ButtonSubmit";
 import ButtonCancel from "../ButtonCancel";
-import MenuItem from '@mui/material/MenuItem';
+import MenuItem from "@mui/material/MenuItem";
 
 export default function CreateFormModal({ element, fn }) {
   const [amount, setAmount] = useState("");
@@ -92,7 +89,10 @@ export default function CreateFormModal({ element, fn }) {
 
   return (
     <Box tabIndex={-1} sx={{ mt: 1, p: 1 }}>
-      <form onSubmit={handleSubmit} style={{ display: "flex", gap: "1em" ,flexDirection:"column"}}>
+      <form
+        onSubmit={handleSubmit}
+        style={{ display: "flex", gap: "1em", flexDirection: "column" }}
+      >
         <TextField
           label={`Amount`}
           id="amount"

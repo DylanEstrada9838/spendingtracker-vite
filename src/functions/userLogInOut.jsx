@@ -1,8 +1,7 @@
-const logged = ()=>{
-    const token = localStorage.getItem('token');
+const logged = () => {
+  const token = localStorage.getItem("token");
 
-    return token ? true : false;
-
-}
+  return token ? true : false;
+};
 
 export default logged;

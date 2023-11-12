@@ -27,7 +27,7 @@ function App() {
               <Route path="/method" element={<ViewMethodsPage />} />
               <Route path="/expense" element={<ViewExpensesPage />} />
             </Route>
-            <Route path="*" element={<NotFound/>}/>
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
       </div>

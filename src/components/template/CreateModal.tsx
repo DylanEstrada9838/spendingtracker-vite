@@ -34,7 +34,7 @@ export default function CreateModal({element}) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Create {element}
+            Add {element}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
               <CreateFormModal element={element} fn={handleClose}/>

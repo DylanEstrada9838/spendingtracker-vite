@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
-import Create from "./Create";
 import PieChartExpense from "../template expenses/PieChart";
-import BasicTable from "./TableMui";
-import CreateMui from "./CreateMui";
 import StickyHeadTable from "./TableScrollable";
 import "../../styles/ViewMui.css";
 import tokenInterceptor from "../../functions/tokenInterceptor";
