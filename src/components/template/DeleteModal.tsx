@@ -1,15 +1,9 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import UpdateFormModal from './UpdateFormModal';
-import ButtonCreate from "../ButtonCreate";
-import Fab from '@mui/material/Fab';
-import EditIcon from "@mui/icons-material/Edit";
 import ButtonDelete from '../ButtonDelete';
 import DeleteFormModal from './DeleteFormModal';
-
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -30,7 +24,7 @@ export default function DeleteModal({element,id}) {
   
   return (
     <div>
-      <ButtonDelete element = {element} fn={handleOpen}/>
+        <ButtonDelete element = {element} fn={handleOpen}/>
       
       <Modal
         open={open}

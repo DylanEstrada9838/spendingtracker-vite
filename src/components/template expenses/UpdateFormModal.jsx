@@ -1,5 +1,4 @@
 import * as React from "react";
-import dayjs from 'dayjs';
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
@@ -10,21 +9,18 @@ import { useState, useEffect } from "react";
 import ButtonSubmit from "../ButtonSubmit";
 import ButtonCancel from "../ButtonCancel";
 import MenuItem from "@mui/material/MenuItem";
-import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
-export default function CreateFormModal({ element, fn }) {
+export default function UpdateFormModal({ element, fn, id }) {
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [methodId, setMethodId] = useState("");
-  const [date, setDate] = useState(dayjs());
   const [categories, setCategories] = useState([]);
   const [methods, setMethods] = useState([]);
   const [message, setMessage] = useState("");
   const [isError, setIsError] = useState(false);
   const [show, setShow] = useState(false);
+  
 
   const handleChangeAmount = (e) => {
     setAmount(e.target.value);
@@ -38,23 +34,19 @@ export default function CreateFormModal({ element, fn }) {
   const handleChangeMethodId = (e) => {
     setMethodId(e.target.value);
   };
-  const handleChangeDate = (e) => {
-    setDate(e.target.value);
-  };
   tokenInterceptor();
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    Axios.post(`http://localhost:8080/${element}`, {
+    Axios.put(`http://localhost:8080/${element}/${id}`, {
       amount: amount,
       description: description,
-      date:date,
       categoryId: categoryId,
       methodId: methodId,
     })
       .then((response) => {
         console.log(response.data);
-        setMessage("Created succesfully");
+        setMessage("Updated succesfully");
         setIsError(false);
         setShow(true);
         setTimeout(function () {
@@ -73,11 +65,11 @@ export default function CreateFormModal({ element, fn }) {
         }, 2000);
       });
   };
-
   const fetchView = () => {
     Axios.get(`http://localhost:8080/category`)
       .then((response) => {
         setCategories(response.data);
+        console.log(categories);
       })
       .catch((error) => {
         console.error("Error fetching categories:", error);
@@ -89,19 +81,34 @@ export default function CreateFormModal({ element, fn }) {
       .catch((error) => {
         console.error("Error fetching methods:", error);
       });
+      Axios.get(`http://localhost:8080/${element}/${id}`)
+      .then((response) => {
+        const existingData = response.data;
+
+        // Set initial values for the form fields based on existing data
+        setAmount(existingData.amount || '');
+        setDescription(existingData.description || '');
+        setCategoryId(existingData.categoryId || '');
+        setMethodId(existingData.methodId || '');
+      })
+      .catch((error) => {
+        console.error('Error fetching existing data:', error);
+      });
   };
   useEffect(() => {
     // Fetch categories and methods from your server using Axios
     fetchView();
   }, []);
-
   return (
-    
-      
     <Box tabIndex={-1} sx={{ mt: 1, p: 1 }}>
       <form
         onSubmit={handleSubmit}
-        style={{ display: "flex", gap: "1em", flexDirection: "column",marginBottom:"1em" }}
+        style={{
+          display: "flex",
+          gap: "1em",
+          marginBottom: "1em",
+          flexDirection: "column",
+        }}
       >
         <TextField
           label={`Amount`}
@@ -110,6 +117,7 @@ export default function CreateFormModal({ element, fn }) {
           size="small"
           value={amount}
           onChange={handleChangeAmount}
+        
         />
         <TextField
           label={`Description(Optional)`}
@@ -148,10 +156,6 @@ export default function CreateFormModal({ element, fn }) {
             </MenuItem>
           ))}
         </TextField>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DesktopDatePicker size="small" value={date}
-          onChange={handleChangeDate}/>
-        </LocalizationProvider>
 
         <ButtonSubmit />
         <ButtonCancel fn={fn} />

@@ -24,7 +24,8 @@ export default function UpdateModal({element,id}) {
   
   return (
     <div>
-        <ButtonUpdate element = {element} fn={handleOpen}/>
+      <ButtonUpdate element = {element} fn={handleOpen}/>
+      
       <Modal
         open={open}
         onClose={handleClose}

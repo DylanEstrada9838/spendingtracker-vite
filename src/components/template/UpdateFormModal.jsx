@@ -1,8 +1,5 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Alert from '@mui/material/Alert';
@@ -11,7 +8,6 @@ import tokenInterceptor from "../../functions/tokenInterceptor";
 import { useState } from 'react';
 import ButtonSubmit from "../ButtonSubmit";
 import ButtonCancel from "../ButtonCancel";
-import { useParams, useNavigate } from "react-router-dom";
 
 export default function UpdateFormModal({element,fn,id}) {
 
@@ -57,7 +53,7 @@ export default function UpdateFormModal({element,fn,id}) {
           <Box tabIndex={-1} sx={{ mt: 1, p: 1 }}>
             <form
               onSubmit={handleSubmit}
-              style={{ display: "flex", gap: "1em" }}
+              style={{ display: "flex", gap: "1em",marginBottom:"1em" }}
             >
               <TextField
                 label={`New ${element} name`}

@@ -11,6 +11,7 @@ import PrivateRoutes from "./functions/PrivateRoutes";
 import logged from "./functions/userLogInOut";
 import ResponsiveAppBarOut from "./components/NavBarMuiOut";
 import NotFound from "./pages/NotFound";
+import PublicRoutes from "./functions/PublicRoutes";
 
 function App() {
   return (
@@ -20,8 +21,10 @@ function App() {
         <div>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/sign-up" element={<SignUpPage />} />
-            <Route path="/sign-in" element={<SignInPage />} />
+            <Route element={<PublicRoutes/>}>
+              <Route path="/sign-up" element={<SignUpPage />} />
+              <Route path="/sign-in" element={<SignInPage />} />
+            </Route>
             <Route element={<PrivateRoutes />}>
               <Route path="/category" element={<ViewCategoriesPage />} />
               <Route path="/method" element={<ViewMethodsPage />} />

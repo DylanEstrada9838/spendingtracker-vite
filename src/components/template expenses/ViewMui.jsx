@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import PieChartExpense from "../template expenses/PieChart";
-import StickyHeadTable from "./TableScrollable";
+import TableScrollable from "./TableScrollable";
 import "../../styles/ViewMui.css";
 import tokenInterceptor from "../../functions/tokenInterceptor";
 import CreateModal from "./CreateModal";
@@ -25,7 +25,7 @@ const ViewMui = ({ element, id }) => {
     <div>
       <CreateModal element={element} />
       <div class="view-mui">
-        <StickyHeadTable
+        <TableScrollable
           element={element}
           rows={view.map((item) => ({
             id: item.id,

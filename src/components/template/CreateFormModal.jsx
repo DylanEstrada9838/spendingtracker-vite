@@ -55,7 +55,7 @@ export default function CreateFormModal({element,fn}) {
           <Box tabIndex={-1} sx={{ mt: 1, p: 1 }}>
             <form
               onSubmit={handleSubmit}
-              style={{ display: "flex", gap: "1em" }}
+              style={{ display: "flex", gap: "1em",marginBottom:"1em" }}
             >
               <TextField
                 label={`New ${element}`}
@@ -75,7 +75,7 @@ export default function CreateFormModal({element,fn}) {
                 </Alert>
               </Stack>
             ) : (
-              <Stack sx={{ width: "100%" }} spacing={2}>
+              <Stack sx={{ width: "100%"}} spacing={2}>
                 <Alert variant="filled" severity="success">
                   {message}
                 </Alert>

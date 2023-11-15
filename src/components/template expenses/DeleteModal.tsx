@@ -2,8 +2,8 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import UpdateFormModal from './UpdateFormModal';
-import ButtonUpdate from '../ButtonUpdate';
+import ButtonDelete from '../ButtonDelete';
+import DeleteFormModal from './DeleteFormModal';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -17,26 +17,27 @@ const style = {
   p: 4,
 };
 
-export default function UpdateModal({element,id}) {
+export default function DeleteModal({element,id}) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   
   return (
     <div>
-        <ButtonUpdate element = {element} fn={handleOpen}/>
+      <ButtonDelete element = {element} fn={handleOpen}/>
+      
       <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Edit {element}
+        <Box sx={style}style={{display:"flex",justifyContent:"center",flexDirection:"column",alignItems:"center"}}>
+          <Typography id="modal-modal-title" variant="h6" component="h2" style={{textAlign:"center"}}>
+            Are you sure you want to delete this {element}?
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              <UpdateFormModal element={element} fn={handleClose} id={id}/>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }} >
+              <DeleteFormModal element={element} fn={handleClose} id={id}/>
           </Typography>
         </Box>
       </Modal>

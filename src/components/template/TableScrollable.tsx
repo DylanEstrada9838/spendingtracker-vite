@@ -9,13 +9,10 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import capitalizeFirstLetter from "../../functions/capitalize";
 import "../../styles/ViewMui.css";
-import Fab from "@mui/material/Fab";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
 import UpdateModal from "./UpdateModal";
 import DeleteModal from "./DeleteModal";
 
-export default function StickyHeadTable({ rows, element }) {
+export default function TableScrollable({ rows, element }) {
   interface Column {
     id: typeof element | "actions";
     label: string;
