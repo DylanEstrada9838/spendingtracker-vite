@@ -29,7 +29,8 @@ const ViewMui = ({ element, id }) => {
           element={element}
           rows={view.map((item) => ({
             id: item.id,
-            [element]: item.amount,
+            [element]: `$ ${item.amount.toFixed(2)}`,
+            date:`${(item.date).substring(0,10)}`,
             category: item.category.name,
             method: item.method.name,
           }))}

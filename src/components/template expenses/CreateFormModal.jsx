@@ -38,8 +38,9 @@ export default function CreateFormModal({ element, fn }) {
   const handleChangeMethodId = (e) => {
     setMethodId(e.target.value);
   };
-  const handleChangeDate = (e) => {
-    setDate(e.target.value);
+  const handleChangeDate = (newDate) => {
+    setDate(newDate);
+    
   };
   tokenInterceptor();
   const handleSubmit = (e) => {
@@ -149,8 +150,8 @@ export default function CreateFormModal({ element, fn }) {
           ))}
         </TextField>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DesktopDatePicker size="small" value={date}
-          onChange={handleChangeDate}/>
+        <DesktopDatePicker value={date}
+          onChange={handleChangeDate} slotProps={{ textField: { size: 'small',helperText: 'Please select a date' } }}/>
         </LocalizationProvider>
 
         <ButtonSubmit />

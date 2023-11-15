@@ -1,22 +1,11 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
 import CreateFormModal from './CreateFormModal';
 import ButtonCreate from "../ButtonCreate";
-
-
-const style = {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
+import ModalClose from '@mui/joy/ModalClose';
+import Sheet from '@mui/joy/Sheet';
+import Modal from '@mui/joy/Modal';
 
 export default function CreateModal({element}) {
   const [open, setOpen] = React.useState(false);
@@ -31,15 +20,23 @@ export default function CreateModal({element}) {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       >
-        <Box sx={style}>
+         <Sheet variant="outlined"
+          sx={{
+            maxWidth: 500,
+            borderRadius: 'md',
+            p: 3,
+            boxShadow: 'lg',
+          }}>
+          <ModalClose variant="plain" sx={{ m: 1 }} />
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Add {element}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
               <CreateFormModal element={element} fn={handleClose}/>
           </Typography>
-        </Box>
+        </Sheet>
       </Modal>
     </div>
   );

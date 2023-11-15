@@ -1,21 +1,15 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
 import ButtonDelete from '../ButtonDelete';
 import DeleteFormModal from './DeleteFormModal';
-
-const style = {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
+import ModalClose from '@mui/joy/ModalClose';
+import Sheet from '@mui/joy/Sheet';
+import Modal from '@mui/joy/Modal';
+import DialogTitle from '@mui/joy/DialogTitle';
+import WarningRoundedIcon from '@mui/icons-material/WarningRounded';
+import Divider from '@mui/joy/Divider';
+import DialogContent from '@mui/joy/DialogContent';
 
 export default function DeleteModal({element,id}) {
   const [open, setOpen] = React.useState(false);
@@ -31,15 +25,32 @@ export default function DeleteModal({element,id}) {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       >
-        <Box sx={style}style={{display:"flex",justifyContent:"center",flexDirection:"column",alignItems:"center"}}>
-          <Typography id="modal-modal-title" variant="h6" component="h2" style={{textAlign:"center"}}>
+         <Sheet variant="outlined"
+          sx={{
+            maxWidth: 500,
+            borderRadius: 'md',
+            p: 3,
+            boxShadow: 'lg',
+            display:"flex",
+            alignItems:"center",
+            flexDirection:"column",
+            height:"250x",
+            gap:".5em"
+          }}>
+          <DialogTitle>
+            <WarningRoundedIcon color="error" />
+            Delete {element}
+          </DialogTitle>
+          <Divider/>
+          <DialogContent>
             Are you sure you want to delete this {element}?
-          </Typography>
+          </DialogContent>
           <Typography id="modal-modal-description" sx={{ mt: 2 }} >
               <DeleteFormModal element={element} fn={handleClose} id={id}/>
           </Typography>
-        </Box>
+        </Sheet>
       </Modal>
     </div>
   );

@@ -11,6 +11,8 @@ import capitalizeFirstLetter from "../../functions/capitalize";
 import "../../styles/ViewMui.css";
 import DeleteModal from "./DeleteModal";
 import UpdateModal from "./UpdateModal";
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
 
 export default function TableScrollable({ rows, element }) {
   interface Column {
@@ -78,7 +80,10 @@ export default function TableScrollable({ rows, element }) {
                           align={column.align}
                           style={{ position: "relative", zIndex: 1 }}
                         >
-                          {columnIndex === 3 ? ( // Check if it's the second column
+                          {columnIndex===0 ?  
+                          <ListItemText primary={value} secondary={row.date} />
+                          :
+                          columnIndex === 3 ? ( // Check if it's the second column
                             <div style={{ display: "flex", gap: "1em" }}>
                               <UpdateModal element={element} id= {row.id}/>
                               <DeleteModal element={element} id= {row.id}/>

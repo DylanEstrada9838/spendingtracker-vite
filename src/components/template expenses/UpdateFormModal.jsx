@@ -9,12 +9,18 @@ import { useState, useEffect } from "react";
 import ButtonSubmit from "../ButtonSubmit";
 import ButtonCancel from "../ButtonCancel";
 import MenuItem from "@mui/material/MenuItem";
+import dayjs from 'dayjs';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+
 
 export default function UpdateFormModal({ element, fn, id }) {
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [methodId, setMethodId] = useState("");
+  const [date, setDate] = useState("");
   const [categories, setCategories] = useState([]);
   const [methods, setMethods] = useState([]);
   const [message, setMessage] = useState("");
@@ -34,18 +40,20 @@ export default function UpdateFormModal({ element, fn, id }) {
   const handleChangeMethodId = (e) => {
     setMethodId(e.target.value);
   };
+  const handleChangeDate = (newDate) => {
+    setDate(newDate);
+  };
   tokenInterceptor();
   const handleSubmit = (e) => {
     e.preventDefault();
-
     Axios.put(`http://localhost:8080/${element}/${id}`, {
       amount: amount,
       description: description,
+      date:date,
       categoryId: categoryId,
       methodId: methodId,
     })
       .then((response) => {
-        console.log(response.data);
         setMessage("Updated succesfully");
         setIsError(false);
         setShow(true);
@@ -90,6 +98,7 @@ export default function UpdateFormModal({ element, fn, id }) {
         setDescription(existingData.description || '');
         setCategoryId(existingData.categoryId || '');
         setMethodId(existingData.methodId || '');
+        setDate(dayjs((existingData.date.substring(0-10)))||'');
       })
       .catch((error) => {
         console.error('Error fetching existing data:', error);
@@ -156,6 +165,10 @@ export default function UpdateFormModal({ element, fn, id }) {
             </MenuItem>
           ))}
         </TextField>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <DesktopDatePicker value={date}
+          onChange={handleChangeDate} slotProps={{ textField: { size: 'small',helperText: 'Please select a date' } }}/>
+        </LocalizationProvider>
 
         <ButtonSubmit />
         <ButtonCancel fn={fn} />
