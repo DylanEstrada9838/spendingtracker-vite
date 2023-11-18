@@ -4,9 +4,7 @@ import { useState, useEffect } from "react";
 import tokenInterceptor from "../../functions/tokenInterceptor";
 import Axios from "axios";
 import dayjs from 'dayjs';
-import TextField from "@mui/material/TextField";
-import MenuItem from "@mui/material/MenuItem";
-
+import {TextField,MenuItem} from "@mui/material";
 
 export default function StackedBarChart({element}) {
     const [view, setView] = useState([]);

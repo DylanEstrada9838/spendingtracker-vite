@@ -1,18 +1,12 @@
 import * as React from "react";
 import dayjs from 'dayjs';
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import Stack from "@mui/material/Stack";
-import Alert from "@mui/material/Alert";
+import {Box,TextField,MenuItem,Snackbar,MuiAlert} from "@mui/material";
 import Axios from "axios";
 import tokenInterceptor from "../../functions/tokenInterceptor";
 import { useState, useEffect } from "react";
 import ButtonSubmit from "../ButtonSubmit";
 import ButtonCancel from "../ButtonCancel";
-import MenuItem from "@mui/material/MenuItem";
-import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DesktopDatePicker,LocalizationProvider,AdapterDayjs } from '@mui/x-date-pickers/DesktopDatePicker';
 
 export default function CreateFormModal({ element, fn }) {
   const [amount, setAmount] = useState("");
@@ -59,6 +53,7 @@ export default function CreateFormModal({ element, fn }) {
         setMessage("Created succesfully");
         setIsError(false);
         setShow(true);
+        setOpen(true)
         setTimeout(function () {
           setShow(false); // Refresh the page after the delay
         }, 1500);
@@ -69,9 +64,9 @@ export default function CreateFormModal({ element, fn }) {
       .catch((error) => {
         setMessage(error.response.data.message);
         setIsError(true);
-        setShow(true);
+        setOpen(true);
         setTimeout(function () {
-          setShow(false); // Refresh the page after the delay
+          setOpen(false); // Refresh the page after the delay
         }, 2000);
       });
   };
@@ -96,7 +91,12 @@ export default function CreateFormModal({ element, fn }) {
     // Fetch categories and methods from your server using Axios
     fetchView();
   }, []);
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+  const [open, setOpen] = React.useState(false);
 
+ 
   return (
     
       
@@ -106,7 +106,7 @@ export default function CreateFormModal({ element, fn }) {
         style={{ display: "flex", gap: "1em", flexDirection: "column",marginBottom:"1em" }}
       >
         <TextField
-          label={`Amount`}
+          label={`$ Amount`}
           id="amount"
           type="number"
           size="small"
@@ -157,21 +157,22 @@ export default function CreateFormModal({ element, fn }) {
 
         <ButtonSubmit />
         <ButtonCancel fn={fn} />
+        
       </form>
-      {show &&
-        (isError ? (
-          <Stack sx={{ width: "100%" }} spacing={2}>
-            <Alert variant="filled" severity="error">
-              {message}
-            </Alert>
-          </Stack>
+      
+        {isError ? (
+          <Snackbar open={open} autoHideDuration={6000} >
+        <Alert severity="error" sx={{ width: '100%' }}>
+          {message}
+        </Alert>
+      </Snackbar>
         ) : (
-          <Stack sx={{ width: "100%" }} spacing={2}>
-            <Alert variant="filled" severity="success">
-              {message}
-            </Alert>
-          </Stack>
-        ))}
+          <Snackbar open={open} autoHideDuration={6000} >
+        <Alert  severity="success" sx={{ width: '100%' }}>
+          {message}
+        </Alert>
+      </Snackbar>
+        )}
     </Box>
   );
 }

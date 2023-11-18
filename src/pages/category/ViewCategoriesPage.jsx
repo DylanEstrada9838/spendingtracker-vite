@@ -1,10 +1,13 @@
 import ViewMui from "../../components/template/ViewMui";
+import Container from '@mui/material/Container';
 
 const ViewCategoriesPage = () => {
   return (
-    <div>
-      <ViewMui element="category" id="CategoryId" />
-    </div>
+    
+      <Container maxWidth="sm">
+        <ViewMui element="category" id="CategoryId" />
+      </Container >
+    
   );
 };
 

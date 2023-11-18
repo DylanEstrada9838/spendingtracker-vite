@@ -15,6 +15,7 @@ import PaymentsIcon from "@mui/icons-material/Payments";
 import { Link } from "react-router-dom";
 import logout from "../functions/logout";
 import { useNavigate } from "react-router-dom";
+import PaidIcon from '@mui/icons-material/Paid';
 
 const links = ["expense", "category", "method","dashboard"];
 const pages = ["Expenses", "Categories", "Methods","Dashboard"];

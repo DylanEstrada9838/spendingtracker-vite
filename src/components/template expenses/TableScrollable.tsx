@@ -1,17 +1,9 @@
 import * as React from "react";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
+import {Paper,Table,TableBody,TableCell,TableContainer,TableHead,TablePagination,TableRow} from "@mui/material";
 import capitalizeFirstLetter from "../../functions/capitalize";
 import "../../styles/ViewMui.css";
 import DeleteModal from "./DeleteModal";
 import UpdateModal from "./UpdateModal";
-import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 
 export default function TableScrollable({ rows, element }) {
@@ -30,9 +22,9 @@ export default function TableScrollable({ rows, element }) {
       minWidth: 170,
       format: (value: number) => `$ ${value.toFixed(2)}`,
     },
-    { id: "category", label: "Category", minWidth: 50 },
-    { id: "method", label: "Method", minWidth: 50 },
-    { id: "actions", label: "Actions", minWidth: 50 },
+    { id: "category", label: "Category", minWidth: 60 },
+    { id: "method", label: "Method", minWidth: 60 },
+    { id: "actions", label: "Actions", minWidth: 60 },
   ];
 
   const [page, setPage] = React.useState(0);
@@ -51,7 +43,7 @@ export default function TableScrollable({ rows, element }) {
 
   return (
     <Paper className={"table.scrollable"}>
-      <TableContainer sx={{ maxHeight: 440 }}>
+      <TableContainer sx={{ maxHeight: 500 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>

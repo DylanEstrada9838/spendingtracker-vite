@@ -5,7 +5,7 @@ import Container from '@mui/material/Container';
 const ViewExpensesPage = () => {
   return (
     <div>
-      <Container maxWidth="lg" style={{border:"2px black solid"}}>
+      <Container maxWidth="lg" >
         <ViewMui element="expense" />
       </Container>
     </div>

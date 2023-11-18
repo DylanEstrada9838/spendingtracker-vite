@@ -1,9 +1,12 @@
 import ViewMui from "../../components/template/ViewMui";
+import Container from '@mui/material/Container';
 const ViewMethodsPage = () => {
   return (
-    <div>
-      <ViewMui element="method" id="MethodId" />
-    </div>
+    
+     <Container maxWidth="sm">
+       <ViewMui element="method" id="MethodId" />
+     </Container >
+   
   );
 };
 

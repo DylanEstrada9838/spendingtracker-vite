@@ -1,14 +1,9 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import ButtonDelete from '../ButtonDelete';
 import DeleteFormModal from './DeleteFormModal';
-import Sheet from '@mui/joy/Sheet';
-import Modal from '@mui/joy/Modal';
-import DialogTitle from '@mui/joy/DialogTitle';
+import {Sheet,Modal,DialogTitle,Divider,DialogContent} from '@mui/joy';
 import WarningRoundedIcon from '@mui/icons-material/WarningRounded';
-import Divider from '@mui/joy/Divider';
-import DialogContent from '@mui/joy/DialogContent';
 
 export default function DeleteModal({element,id}) {
   const [open, setOpen] = React.useState(false);

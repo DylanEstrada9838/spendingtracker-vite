@@ -1,11 +1,8 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import UpdateFormModal from './UpdateFormModal';
 import ButtonUpdate from '../ButtonUpdate';
-import ModalClose from '@mui/joy/ModalClose';
-import Sheet from '@mui/joy/Sheet';
-import Modal from '@mui/joy/Modal';
+import {ModalClose,Sheet,Modal} from '@mui/joy';
 
 export default function UpdateModal({element,id}) {
   const [open, setOpen] = React.useState(false);

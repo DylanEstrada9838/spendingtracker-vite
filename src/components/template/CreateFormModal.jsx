@@ -1,14 +1,8 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import TextField from '@mui/material/TextField';
-import Stack from '@mui/material/Stack';
-import Alert from '@mui/material/Alert';
-import Axios from "axios";
-import tokenInterceptor from "../../functions/tokenInterceptor";
 import { useState } from 'react';
+import Axios from "axios"
+import tokenInterceptor from "../../functions/tokenInterceptor";
+import {Box,TextField,Stack,Alert} from '@mui/material/';
 import ButtonSubmit from "../ButtonSubmit";
 import ButtonCancel from "../ButtonCancel";
 
@@ -55,7 +49,7 @@ export default function CreateFormModal({element,fn}) {
           <Box tabIndex={-1} sx={{ mt: 1, p: 1 }}>
             <form
               onSubmit={handleSubmit}
-              style={{ display: "flex", gap: "1em",marginBottom:"1em" }}
+              style={{ display: "flex", gap: "1em",marginBottom:"1em", minHeight:"110px",alignItems:"flex-start",flexFlow:"row wrap",maxWidth:"400px"}}
             >
               <TextField
                 label={`New ${element}`}
@@ -65,10 +59,9 @@ export default function CreateFormModal({element,fn}) {
                 onChange={handleChange}
               />
 
-              <ButtonSubmit />
+              <ButtonSubmit/>
               <ButtonCancel fn={fn}/>
-            </form>
-            {show &&(isError ? (
+              {show &&(isError ? (
               <Stack sx={{ width: "100%" }} spacing={2}>
                 <Alert variant="filled" severity="error">
                   {message}
@@ -81,6 +74,8 @@ export default function CreateFormModal({element,fn}) {
                 </Alert>
               </Stack>
             ))}
+            </form>
+          
           </Box>
           
   );

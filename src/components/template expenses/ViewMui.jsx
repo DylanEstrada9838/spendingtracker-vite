@@ -24,8 +24,8 @@ const ViewMui = ({ element, id }) => {
   return (
     <div>
       
-      <div class="view-mui">
-        <CreateModal element={element} />
+      <div class="view-mui" >
+        <CreateModal element={element} class="buttonExpense" />
         <TableScrollable
           element={element}
           rows={view.map((item) => ({

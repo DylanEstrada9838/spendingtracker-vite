@@ -1,8 +1,6 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Alert from '@mui/material/Alert';
 import Axios from "axios";
+import {Box,Stack,Alert} from '@mui/material';
 import tokenInterceptor from "../../functions/tokenInterceptor";
 import { useState } from 'react';
 import ButtonSubmit from "../ButtonSubmit";
