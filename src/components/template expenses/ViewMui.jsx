@@ -23,20 +23,19 @@ const ViewMui = ({ element, id }) => {
 
   return (
     <div>
-      <CreateModal element={element} />
+      
       <div class="view-mui">
+        <CreateModal element={element} />
         <TableScrollable
           element={element}
           rows={view.map((item) => ({
             id: item.id,
-            [element]: `$ ${item.amount.toFixed(2)}`,
+            [element]: ` - $ ${item.amount.toFixed(2)}`,
             date:`${(item.date).substring(0,10)}`,
             category: item.category.name,
             method: item.method.name,
           }))}
         />
-        <PieChartExpense element={"category"} id={id} value="totalAmount" />
-        <PieChartExpense element={"method"} id={id} value="totalAmount" />
       </div>
     </div>
   );

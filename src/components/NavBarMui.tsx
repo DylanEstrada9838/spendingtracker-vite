@@ -16,8 +16,8 @@ import { Link } from "react-router-dom";
 import logout from "../functions/logout";
 import { useNavigate } from "react-router-dom";
 
-const links = ["expense", "category", "method"];
-const pages = ["Expenses", "Categories", "Methods"];
+const links = ["expense", "category", "method","dashboard"];
+const pages = ["Expenses", "Categories", "Methods","Dashboard"];
 const settings = ["Account", "Logout"];
 
 function ResponsiveAppBar() {

@@ -12,6 +12,7 @@ import logged from "./functions/userLogInOut";
 import ResponsiveAppBarOut from "./components/NavBarMuiOut";
 import NotFound from "./pages/NotFound";
 import PublicRoutes from "./functions/PublicRoutes";
+import DashboardPage from "./pages/expense/Dashboard";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
               <Route path="/category" element={<ViewCategoriesPage />} />
               <Route path="/method" element={<ViewMethodsPage />} />
               <Route path="/expense" element={<ViewExpensesPage />} />
+              <Route path="/dashboard" element={<DashboardPage />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

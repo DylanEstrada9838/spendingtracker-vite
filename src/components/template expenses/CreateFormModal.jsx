@@ -40,6 +40,7 @@ export default function CreateFormModal({ element, fn }) {
   };
   const handleChangeDate = (newDate) => {
     setDate(newDate);
+    console.log(newDate)
     
   };
   tokenInterceptor();
