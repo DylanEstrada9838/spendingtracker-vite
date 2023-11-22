@@ -4,36 +4,31 @@ import * as React from "react";
 import { PieChart } from "@mui/x-charts/PieChart";
 import tokenInterceptor from "../../functions/tokenInterceptor";
 
-const PieChartExpense = ({ element, id, value }) => {
-  const [view, setView] = useState([]);
-  tokenInterceptor();
-  const fetchView = () => {
-    Axios.get(`http://localhost:8080/expense/${element}`, {}).then(
-      (response) => {
-        setView(response.data);
-      }
-    );
-  };
-
-  useEffect(() => {
-    fetchView();
-  }, []);
+const PieChartExpense = ({ element, id, value,year,data }) => {
+ 
 
   return (
     <div>
-      <h2 style={{ textAlign: "center" }}>Total expenses by {element} </h2>
+      <h2 style={{ textAlign: "center" }}>Expenses/{`${element} ${year}`} </h2>
       <PieChart
         series={[
           {
-            data: view.map((item) => ({
+            data: data.map((item) => ({
               id: item[id],
               value: item[value],
               label: item[element].name,
             })),
+            innerRadius: 50,
+            outerRadius: 100,
+      paddingAngle: 2,
+      cornerRadius: 2,
+      
           },
+          
         ]}
-        width={400}
-        height={200}
+        width={430}
+        height={320}
+        
       />
     </div>
   );

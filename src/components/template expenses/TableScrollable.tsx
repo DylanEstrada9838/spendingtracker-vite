@@ -5,6 +5,8 @@ import "../../styles/ViewMui.css";
 import DeleteModal from "./DeleteModal";
 import UpdateModal from "./UpdateModal";
 import ListItemText from '@mui/material/ListItemText';
+import { ThemeProvider } from '@mui/material/styles';
+import OrangeTheme from "../../themes/OrangeTheme";
 
 export default function TableScrollable({ rows, element }) {
   interface Column {

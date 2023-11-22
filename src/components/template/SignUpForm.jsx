@@ -1,10 +1,12 @@
 import * as React from "react";
 import {Box,TextField,Fab,Button,Alert,Stack} from "@mui/material";
+import {Snackbar} from "@mui/material";
 import LockIcon from '@mui/icons-material/Lock';
 import axios from 'axios'; 
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import MuiAlert from '@mui/material/Alert';
 
 export default function SignUp() {
   const [name, setName] = useState("");
@@ -12,7 +14,11 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [isError, setIsError] = useState(false);
-  const [show,setShow]=useState(false);
+  
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+  const [open, setOpen] = React.useState(false);
 
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
@@ -35,20 +41,28 @@ export default function SignUp() {
       .then((response) => {
         setMessage("Created succesfully");
         setIsError(false);
-        setShow(true)
-        setTimeout(function() {
-            setShow(false) // Refresh the page after the delay
-          }, 1500);
+        setOpen(true)
+        
         setTimeout(function() {
             navigate("/sign-in") // Refresh the page after the delay
           }, 2000);
       })
       .catch((error) => {
-        setMessage(error.response.data.message);
+        console.log(error)
+        if (error.response.data.code === 'ERR_AUTH' || error.response.data.code === 'ERR_USER' ) {
+          console.log('Authentication Error:', error.response.data.message);
+          setMessage(error.response.data.message);
+        } else if (error.response.data.code === 'ERR_VALIDATION') {
+          // Check for specific validation error
+          const validationError = error.response.data.details[0];
+          console.log('Validation Error:', validationError.message);
+          setMessage(error.response.data.details[0].message);
+        }
+        
         setIsError(true);
-        setShow(true)
+        setOpen(true)
         setTimeout(function() {
-            setShow(false) // Refresh the page after the delay
+            setOpen(false) // Refresh the page after the delay
           }, 2000);
       });
   };
@@ -91,19 +105,19 @@ export default function SignUp() {
      <Link to="/sign-in">
                 <p style={{color:'blue'}}>Already have an account? Sign-In</p>
             </Link>
-     {show &&(isError ? (
-              <Stack sx={{ width: "100%" }} spacing={2}>
-                <Alert variant="filled" severity="error">
-                  {message}
-                </Alert>
-              </Stack>
-            ) : (
-              <Stack sx={{ width: "100%" }} spacing={2}>
-                <Alert variant="filled" severity="success">
-                  {message}
-                </Alert>
-              </Stack>
-            ))}
+            {isError ? (
+          <Snackbar open={open} autoHideDuration={6000} >
+        <Alert severity="error" sx={{ width: '100%' }}>
+          {message}
+        </Alert>
+      </Snackbar>
+        ) : (
+          <Snackbar open={open} autoHideDuration={6000} >
+        <Alert  severity="success" sx={{ width: '100%' }}>
+          {message}
+        </Alert>
+      </Snackbar>
+        )}
     </Box>
   );
 }

@@ -1,12 +1,15 @@
 import * as React from "react";
-import {Box,TextField,Alert,Stack,MenuItem} from "@mui/material";
+import {Box,TextField,Stack,MenuItem,Snackbar} from "@mui/material";
+import MuiAlert from '@mui/material/Alert';
 import Axios from "axios";
 import tokenInterceptor from "../../functions/tokenInterceptor";
 import { useState, useEffect } from "react";
 import ButtonSubmit from "../ButtonSubmit";
 import ButtonCancel from "../ButtonCancel";
 import dayjs from 'dayjs';
-import { DesktopDatePicker,LocalizationProvider,AdapterDayjs } from '@mui/x-date-pickers/DesktopDatePicker';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DesktopDatePicker,LocalizationProvider } from '@mui/x-date-pickers';
+
 
 
 
@@ -20,7 +23,11 @@ export default function UpdateFormModal({ element, fn, id }) {
   const [methods, setMethods] = useState([]);
   const [message, setMessage] = useState("");
   const [isError, setIsError] = useState(false);
-  const [show, setShow] = useState(false);
+
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+  const [open, setOpen] = React.useState(false);
   
 
   const handleChangeAmount = (e) => {
@@ -51,18 +58,15 @@ export default function UpdateFormModal({ element, fn, id }) {
       .then((response) => {
         setMessage("Updated succesfully");
         setIsError(false);
-        setShow(true);
-        setTimeout(function () {
-          setShow(false); // Refresh the page after the delay
-        }, 1500);
+        setOpen(true);
         setTimeout(function () {
           location.reload(); // Refresh the page after the delay
         }, 2000);
       })
       .catch((error) => {
-        setMessage(error.response.data.message);
+        setMessage(error.response.data.details[0].message);
         setIsError(true);
-        setShow(true);
+        setOpen(true);
         setTimeout(function () {
           setShow(false); // Refresh the page after the delay
         }, 2000);
@@ -168,20 +172,19 @@ export default function UpdateFormModal({ element, fn, id }) {
         <ButtonSubmit />
         <ButtonCancel fn={fn} />
       </form>
-      {show &&
-        (isError ? (
-          <Stack sx={{ width: "100%" }} spacing={2}>
-            <Alert variant="filled" severity="error">
-              {message}
-            </Alert>
-          </Stack>
+      {isError ? (
+          <Snackbar open={open} autoHideDuration={6000} >
+        <Alert severity="error" sx={{ width: '100%' }}>
+          {message}
+        </Alert>
+      </Snackbar>
         ) : (
-          <Stack sx={{ width: "100%" }} spacing={2}>
-            <Alert variant="filled" severity="success">
-              {message}
-            </Alert>
-          </Stack>
-        ))}
+          <Snackbar open={open} autoHideDuration={6000} >
+        <Alert  severity="success" sx={{ width: '100%' }}>
+          {message}
+        </Alert>
+      </Snackbar>
+        )}
     </Box>
   );
 }

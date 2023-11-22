@@ -16,6 +16,7 @@ import DashboardPage from "./pages/expense/Dashboard";
 
 function App() {
   return (
+    
     <BrowserRouter>
       <div>
         {logged() ? <ResponsiveAppBar /> : <ResponsiveAppBarOut />}

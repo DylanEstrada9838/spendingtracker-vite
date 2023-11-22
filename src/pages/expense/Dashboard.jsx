@@ -1,10 +1,14 @@
 import StackedBarChart from "../../components/template expenses/StackBars";
+import { Container } from "@mui/material";
+import CardInvertedColors from "../../components/Paper";
 
 const DashboardPage = () => {
   return (
     <div>
    
-      <StackedBarChart element={"category"} id={"CategoryId"}/>
+      <Container maxWidth="xl" sx={{marginTop:"1em",display:"flex",alignItems:"center"}}>
+        <StackedBarChart element={"category"} id={"CategoryId"}/>
+      </Container >
     </div>
   );
 };

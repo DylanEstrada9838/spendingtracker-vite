@@ -5,10 +5,13 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import PaymentsIcon from "@mui/icons-material/Payments";
 import { Link } from "react-router-dom";
+import OrangeTheme from "../themes/OrangeTheme";
+import { ThemeProvider } from '@mui/material/styles';
 
 function ResponsiveAppBarOut() {
   return (
-    <AppBar position="static">
+    <ThemeProvider theme={OrangeTheme}>
+      <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <PaymentsIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
@@ -53,6 +56,8 @@ function ResponsiveAppBarOut() {
         </Toolbar>
       </Container>
     </AppBar>
+    </ThemeProvider>
+    
   );
 }
 export default ResponsiveAppBarOut;

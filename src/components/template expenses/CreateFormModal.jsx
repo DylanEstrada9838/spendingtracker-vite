@@ -1,12 +1,14 @@
 import * as React from "react";
 import dayjs from 'dayjs';
-import {Box,TextField,MenuItem,Snackbar,MuiAlert} from "@mui/material";
+import {Box,TextField,MenuItem,Snackbar} from "@mui/material";
+import MuiAlert from '@mui/material/Alert';
 import Axios from "axios";
 import tokenInterceptor from "../../functions/tokenInterceptor";
 import { useState, useEffect } from "react";
 import ButtonSubmit from "../ButtonSubmit";
 import ButtonCancel from "../ButtonCancel";
-import { DesktopDatePicker,LocalizationProvider,AdapterDayjs } from '@mui/x-date-pickers/DesktopDatePicker';
+import { DesktopDatePicker,LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 export default function CreateFormModal({ element, fn }) {
   const [amount, setAmount] = useState("");
@@ -18,8 +20,12 @@ export default function CreateFormModal({ element, fn }) {
   const [methods, setMethods] = useState([]);
   const [message, setMessage] = useState("");
   const [isError, setIsError] = useState(false);
-  const [show, setShow] = useState(false);
 
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+  const [open, setOpen] = React.useState(false);
+ 
   const handleChangeAmount = (e) => {
     setAmount(e.target.value);
   };
@@ -52,17 +58,14 @@ export default function CreateFormModal({ element, fn }) {
         console.log(response.data);
         setMessage("Created succesfully");
         setIsError(false);
-        setShow(true);
         setOpen(true)
-        setTimeout(function () {
-          setShow(false); // Refresh the page after the delay
-        }, 1500);
         setTimeout(function () {
           location.reload(); // Refresh the page after the delay
         }, 2000);
       })
       .catch((error) => {
-        setMessage(error.response.data.message);
+        console.log(error.response.data.details[0].message)
+        setMessage(error.response.data.details[0].message);
         setIsError(true);
         setOpen(true);
         setTimeout(function () {
@@ -91,10 +94,7 @@ export default function CreateFormModal({ element, fn }) {
     // Fetch categories and methods from your server using Axios
     fetchView();
   }, []);
-  const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-  });
-  const [open, setOpen] = React.useState(false);
+  
 
  
   return (

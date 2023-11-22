@@ -1,34 +1,52 @@
-import * as React from 'react';
-import { BarChart } from '@mui/x-charts/BarChart';
+import * as React from "react";
+import { BarChart } from "@mui/x-charts/BarChart";
 import { useState, useEffect } from "react";
 import tokenInterceptor from "../../functions/tokenInterceptor";
 import Axios from "axios";
-import dayjs from 'dayjs';
-import {TextField,MenuItem} from "@mui/material";
+import dayjs from "dayjs";
+import { TextField, MenuItem } from "@mui/material";
+import CardInvertedColors from "../Paper";
+import PieChartExpense from "./PieChart";
+import { PieChart } from "@mui/x-charts";
 
-export default function StackedBarChart({element}) {
-    const [view, setView] = useState([]);
-    const [year,setYear] = useState(dayjs().year())
-    const handleChange = (e) => {
-      setYear(e.target.value);
-      console.log(year)
-      
-    };
+export default function StackedBarChart({ element }) {
+  const [view, setView] = useState([]);
+  const [year, setYear] = useState(dayjs().year());
+  const [total,setTotal] = useState("");
+  const [PieChart,setPieChart] = useState([])
+  const handleChange = (e) => {
+    setYear(e.target.value);
+    console.log(year);
+  };
+
   tokenInterceptor();
+
   const fetchView = () => {
-    Axios.get(`http://localhost:8080/expense/${element}/${year}`, {
-    }).then(
+    Axios.get(`http://localhost:8080/expense/${element}/month/${year}`, {}).then(
       (response) => {
         setView(response.data);
-      });
+      }
+    );
 
+    Axios.get(`http://localhost:8080/expense/total/${year}`, {}).then(
+      (response)=>{
+        console.log(response.data)
+        setTotal(response.data[0].totalAmount ? response.data[0].totalAmount.toFixed(2) : "0.00")
+      }
+    )
+    Axios.get(`http://localhost:8080/expense/${element}/${year}`, {}).then(
+      (response) => {
+        setPieChart(response.data);
+      }
+    );
   };
 
   useEffect(() => {
     fetchView();
   }, [year]);
-  const years=[dayjs().year()-1,dayjs().year()]
-  console.log(years)
+
+  const years = [dayjs().year() - 1, dayjs().year()];
+
   const extractData = () => {
     const categoryData = {};
 
@@ -44,25 +62,25 @@ export default function StackedBarChart({element}) {
     });
 
     const xLabels = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
     ];
 
     const series = Object.entries(categoryData).map(([label, data], index) => ({
       data,
       label,
       id: `id-${index}`,
-      stack: 'total',
+      stack: "total",
     }));
 
     return { series, xLabels };
@@ -71,28 +89,34 @@ export default function StackedBarChart({element}) {
   const { series, xLabels } = extractData();
 
   return (
-   <div>
-     <TextField
-           id="year"
-           select
-           label="Select a year"
-           size="small"
-           value={year}
-           onChange={handleChange}
-           sx={{ m: 1, minWidth: 120 }}
-         >
-           {years.map((option,index) => (
-             <MenuItem key={index} value={option}>
-               {option}
-             </MenuItem>
-           ))}
-         </TextField>
-     <BarChart
-       width={1000}
-       height={500}
-       series={series}
-       xAxis={[{ data: xLabels, scaleType: 'band' }]}
-     />
-   </div>
+    <div style={{display:"flex",alignItems:"flex-start"}}>
+      <TextField
+        id="year"
+        select
+        label="Select a year"
+        size="small"
+        value={year}
+        onChange={handleChange}
+        sx={{ m: 1, minWidth: 120 }}
+      >
+        {years.map((option, index) => (
+          <MenuItem key={index} value={option}>
+            {option}
+          </MenuItem>
+        ))}
+     
+        </TextField>
+        <div style ={{display:"flex",flexDirection:"column",alignItems:"stretch",gap:"1em",textAlign:"center"}}>
+          <CardInvertedColors year={year} total={total}  />
+          <PieChartExpense element={element} id={"CategoryId"} value="totalAmount" year={year} data={PieChart}/> 
+        </div>
+        <BarChart
+          width={1000}
+          height={500}
+          series={series}
+          xAxis={[{ data: xLabels, scaleType: "band" }]}
+        />
+      
+    </div>
   );
 }

@@ -30,7 +30,6 @@ const ViewMui = ({ element, id }) => {
           element={element}
           rows={view.map((item) => ({ id: item.id, [element]: item.name }))}
         />
-        <PieChartExpense element={element} id={id} value="totalAmount" />
       </div>
     
   );

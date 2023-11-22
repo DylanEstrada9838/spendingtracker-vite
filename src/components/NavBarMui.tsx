@@ -1,21 +1,13 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
+import {MenuItem,Tooltip,AppBar,Box,Toolbar,IconButton,Typography,Menu,Container,Avatar,Button,} from "@mui/material/";
 import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
+import AccountCircle from '@mui/icons-material/AccountCircle';
 import PaymentsIcon from "@mui/icons-material/Payments";
 import { Link } from "react-router-dom";
 import logout from "../functions/logout";
 import { useNavigate } from "react-router-dom";
-import PaidIcon from '@mui/icons-material/Paid';
+import { ThemeProvider } from '@mui/material/styles';
+import OrangeTheme from "../themes/OrangeTheme";
 
 const links = ["expense", "category", "method","dashboard"];
 const pages = ["Expenses", "Categories", "Methods","Dashboard"];
@@ -52,6 +44,7 @@ function ResponsiveAppBar() {
   };
 
   return (
+   <ThemeProvider theme={OrangeTheme}>
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -161,7 +154,7 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" />
+                <AccountCircle fontSize="large"/>
               </IconButton>
             </Tooltip>
             <Menu
@@ -200,6 +193,7 @@ function ResponsiveAppBar() {
         </Toolbar>
       </Container>
     </AppBar>
+    </ThemeProvider>
   );
 }
 export default ResponsiveAppBar;
