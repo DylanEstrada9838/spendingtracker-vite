@@ -78,7 +78,6 @@ export default function CreateFormModal({element,fn}) {
       </Snackbar>
         )}
             </form>
-          
           </Box>
           
   );
