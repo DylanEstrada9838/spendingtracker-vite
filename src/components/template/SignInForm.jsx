@@ -48,7 +48,7 @@ export default function SignUp() {
         setOpen(true)
         setTimeout(function() {
          
-         navigate("/") // Refresh the page after the delay
+         navigate("/HomePage") // Refresh the page after the delay
          location.reload() 
            }, 2000);
       })

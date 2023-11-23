@@ -13,6 +13,7 @@ import ResponsiveAppBarOut from "./components/NavBarMuiOut";
 import NotFound from "./pages/NotFound";
 import PublicRoutes from "./functions/PublicRoutes";
 import DashboardPage from "./pages/expense/Dashboard";
+import HomePageIn from "./pages/HomePageIn";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
               <Route path="/sign-in" element={<SignInPage />} />
             </Route>
             <Route element={<PrivateRoutes />}>
+            <Route path="/HomePage" element={<HomePageIn />} />
               <Route path="/category" element={<ViewCategoriesPage />} />
               <Route path="/method" element={<ViewMethodsPage />} />
               <Route path="/expense" element={<ViewExpensesPage />} />
