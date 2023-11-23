@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route,HashRouter } from "react-router-dom";
 import "./styles/App.css";
 import ResponsiveAppBar from "./components/NavBarMui";
 import ViewCategoriesPage from "./pages/category/ViewCategoriesPage";
@@ -17,7 +17,7 @@ import DashboardPage from "./pages/expense/Dashboard";
 function App() {
   return (
     
-    <BrowserRouter>
+    <HashRouter>
       <div>
         {logged() ? <ResponsiveAppBar /> : <ResponsiveAppBarOut />}
         <div>
@@ -37,7 +37,7 @@ function App() {
           </Routes>
         </div>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
