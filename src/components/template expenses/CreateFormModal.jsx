@@ -9,6 +9,7 @@ import ButtonSubmit from "../ButtonSubmit";
 import ButtonCancel from "../ButtonCancel";
 import { DesktopDatePicker,LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import BaseUrl from '../../functions/baseUrl';
 
 export default function CreateFormModal({ element, fn }) {
   const [amount, setAmount] = useState("");
@@ -47,7 +48,7 @@ export default function CreateFormModal({ element, fn }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    Axios.post(`http://localhost:8080/${element}`, {
+    Axios.post(`http://${BaseUrl}/${element}`, {
       amount: amount,
       description: description,
       date:date,
@@ -75,14 +76,14 @@ export default function CreateFormModal({ element, fn }) {
   };
 
   const fetchView = () => {
-    Axios.get(`http://localhost:8080/category`)
+    Axios.get(`http://${BaseUrl}/category`)
       .then((response) => {
         setCategories(response.data);
       })
       .catch((error) => {
         console.error("Error fetching categories:", error);
       });
-    Axios.get(`http://localhost:8080/method`)
+    Axios.get(`http://${BaseUrl}/method`)
       .then((response) => {
         setMethods(response.data);
       })

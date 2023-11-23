@@ -6,6 +6,7 @@ import {Box,TextField,MenuItem,Snackbar} from "@mui/material";
 import ButtonSubmit from "../ButtonSubmit";
 import ButtonCancel from "../ButtonCancel";
 import MuiAlert from '@mui/material/Alert';
+import BaseUrl from '../../functions/baseUrl';
 
 export default function CreateFormModal({element,fn}) {
 
@@ -26,7 +27,7 @@ export default function CreateFormModal({element,fn}) {
     e.preventDefault();
     
     Axios.post(
-      `http://localhost:8080/${element}`,
+      `http://${BaseUrl}/${element}`,
       { name: name },
     )
       .then((response) => {

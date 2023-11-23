@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import MuiAlert from '@mui/material/Alert';
+import BaseUrl from '../../functions/baseUrl';
 
 export default function SignUp() {
   const [name, setName] = useState("");
@@ -35,7 +36,7 @@ export default function SignUp() {
     e.preventDefault();
 
     axios.post(
-      `http://localhost:8080/users`,
+      `http://${BaseUrl}/users`,
       { email:email,username: name,password:password },
     )
       .then((response) => {

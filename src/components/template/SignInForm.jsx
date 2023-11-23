@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import MuiAlert from '@mui/material/Alert';
+import BaseUrl from '../../functions/baseUrl';
 
 
 export default function SignUp() {
@@ -33,7 +34,7 @@ export default function SignUp() {
     e.preventDefault();
 
     axios.post(
-      `http://localhost:8080/auth`,
+      `http://${BaseUrl}/auth`,
       { email:email,password:password },
     )
       .then((response) => {

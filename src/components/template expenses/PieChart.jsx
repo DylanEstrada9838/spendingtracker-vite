@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Axios from "axios";
 import * as React from "react";
 import { PieChart } from "@mui/x-charts/PieChart";
-import tokenInterceptor from "../../functions/tokenInterceptor";
+
 
 const PieChartExpense = ({ element, id, value,year,data }) => {
  

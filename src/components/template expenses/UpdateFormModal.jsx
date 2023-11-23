@@ -9,6 +9,7 @@ import ButtonCancel from "../ButtonCancel";
 import dayjs from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DesktopDatePicker,LocalizationProvider } from '@mui/x-date-pickers';
+import BaseUrl from '../../functions/baseUrl';
 
 
 
@@ -48,7 +49,7 @@ export default function UpdateFormModal({ element, fn, id }) {
   tokenInterceptor();
   const handleSubmit = (e) => {
     e.preventDefault();
-    Axios.put(`http://localhost:8080/${element}/${id}`, {
+    Axios.put(`http://${BaseUrl}/${element}/${id}`, {
       amount: amount,
       description: description,
       date:date,
@@ -73,7 +74,7 @@ export default function UpdateFormModal({ element, fn, id }) {
       });
   };
   const fetchView = () => {
-    Axios.get(`http://localhost:8080/category`)
+    Axios.get(`http://${BaseUrl}/category`)
       .then((response) => {
         setCategories(response.data);
         console.log(categories);
@@ -81,14 +82,14 @@ export default function UpdateFormModal({ element, fn, id }) {
       .catch((error) => {
         console.error("Error fetching categories:", error);
       });
-    Axios.get(`http://localhost:8080/method`)
+    Axios.get(`http://${BaseUrl}/method`)
       .then((response) => {
         setMethods(response.data);
       })
       .catch((error) => {
         console.error("Error fetching methods:", error);
       });
-      Axios.get(`http://localhost:8080/${element}/${id}`)
+      Axios.get(`http://${BaseUrl}/${element}/${id}`)
       .then((response) => {
         const existingData = response.data;
 

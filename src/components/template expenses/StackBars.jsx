@@ -7,7 +7,7 @@ import dayjs from "dayjs";
 import { TextField, MenuItem } from "@mui/material";
 import CardInvertedColors from "../Paper";
 import PieChartExpense from "./PieChart";
-import { PieChart } from "@mui/x-charts";
+import BaseUrl from '../../functions/baseUrl';
 
 export default function StackedBarChart({ element }) {
   const [view, setView] = useState([]);
@@ -22,19 +22,19 @@ export default function StackedBarChart({ element }) {
   tokenInterceptor();
 
   const fetchView = () => {
-    Axios.get(`http://localhost:8080/expense/${element}/month/${year}`, {}).then(
+    Axios.get(`http://${BaseUrl}/expense/${element}/month/${year}`, {}).then(
       (response) => {
         setView(response.data);
       }
     );
 
-    Axios.get(`http://localhost:8080/expense/total/${year}`, {}).then(
+    Axios.get(`http://${BaseUrl}/expense/total/${year}`, {}).then(
       (response)=>{
         console.log(response.data)
         setTotal(response.data[0].totalAmount ? response.data[0].totalAmount.toFixed(2) : "0.00")
       }
     )
-    Axios.get(`http://localhost:8080/expense/${element}/${year}`, {}).then(
+    Axios.get(`http://${BaseUrl}/expense/${element}/${year}`, {}).then(
       (response) => {
         setPieChart(response.data);
       }

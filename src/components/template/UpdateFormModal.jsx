@@ -6,6 +6,7 @@ import { useState } from 'react';
 import ButtonSubmit from "../ButtonSubmit";
 import ButtonCancel from "../ButtonCancel";
 import MuiAlert from '@mui/material/Alert';
+import BaseUrl from '../../functions/baseUrl';
 
 export default function UpdateFormModal({element,fn,id}) {
 
@@ -27,7 +28,7 @@ export default function UpdateFormModal({element,fn,id}) {
     e.preventDefault();
     
     Axios.put(
-      `http://localhost:8080/${element}/${id}`,
+      `http://${BaseUrl}/${element}/${id}`,
       { name: name },
     )
       .then((response) => {

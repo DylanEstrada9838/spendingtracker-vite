@@ -5,6 +5,7 @@ import TableScrollable from "./TableScrollable";
 import "../../styles/ViewMui.css";
 import tokenInterceptor from "../../functions/tokenInterceptor";
 import CreateModal from "./CreateModal";
+import BaseUrl from "../../functions/baseUrl";
 
 const ViewMui = ({ element, id }) => {
   const [view, setView] = useState([]);
@@ -12,7 +13,7 @@ const ViewMui = ({ element, id }) => {
   tokenInterceptor();
 
   const fetchView = () => {
-    Axios.get(`http://localhost:8080/${element}`).then((response) => {
+    Axios.get(`http://${BaseUrl}/${element}`).then((response) => {
       setView(response.data);
     });
   };
