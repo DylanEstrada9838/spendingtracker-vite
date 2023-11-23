@@ -22,19 +22,19 @@ export default function StackedBarChart({ element }) {
   tokenInterceptor();
 
   const fetchView = () => {
-    Axios.get(`http://${BaseUrl}/expense/${element}/month/${year}`, {}).then(
+    Axios.get(`${BaseUrl}/expense/${element}/month/${year}`, {}).then(
       (response) => {
         setView(response.data);
       }
     );
 
-    Axios.get(`http://${BaseUrl}/expense/total/${year}`, {}).then(
+    Axios.get(`${BaseUrl}/expense/total/${year}`, {}).then(
       (response)=>{
         console.log(response.data)
         setTotal(response.data[0].totalAmount ? response.data[0].totalAmount.toFixed(2) : "0.00")
       }
     )
-    Axios.get(`http://${BaseUrl}/expense/${element}/${year}`, {}).then(
+    Axios.get(`${BaseUrl}/expense/${element}/${year}`, {}).then(
       (response) => {
         setPieChart(response.data);
       }

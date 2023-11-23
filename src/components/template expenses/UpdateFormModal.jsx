@@ -49,7 +49,7 @@ export default function UpdateFormModal({ element, fn, id }) {
   tokenInterceptor();
   const handleSubmit = (e) => {
     e.preventDefault();
-    Axios.put(`http://${BaseUrl}/${element}/${id}`, {
+    Axios.put(`${BaseUrl}/${element}/${id}`, {
       amount: amount,
       description: description,
       date:date,
@@ -74,7 +74,7 @@ export default function UpdateFormModal({ element, fn, id }) {
       });
   };
   const fetchView = () => {
-    Axios.get(`http://${BaseUrl}/category`)
+    Axios.get(`${BaseUrl}/category`)
       .then((response) => {
         setCategories(response.data);
         console.log(categories);
@@ -82,14 +82,14 @@ export default function UpdateFormModal({ element, fn, id }) {
       .catch((error) => {
         console.error("Error fetching categories:", error);
       });
-    Axios.get(`http://${BaseUrl}/method`)
+    Axios.get(`${BaseUrl}/method`)
       .then((response) => {
         setMethods(response.data);
       })
       .catch((error) => {
         console.error("Error fetching methods:", error);
       });
-      Axios.get(`http://${BaseUrl}/${element}/${id}`)
+      Axios.get(`${BaseUrl}/${element}/${id}`)
       .then((response) => {
         const existingData = response.data;
 

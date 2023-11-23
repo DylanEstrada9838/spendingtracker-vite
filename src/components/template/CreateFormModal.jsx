@@ -27,7 +27,7 @@ export default function CreateFormModal({element,fn}) {
     e.preventDefault();
     
     Axios.post(
-      `http://${BaseUrl}/${element}`,
+      `${BaseUrl}/${element}`,
       { name: name },
     )
       .then((response) => {

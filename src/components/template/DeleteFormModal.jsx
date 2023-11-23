@@ -24,7 +24,7 @@ export default function DeleteFormModal({element,fn,id}) {
     e.preventDefault();
     
     Axios.delete(
-      `http://${BaseUrl}/${element}/${id}`)
+      `${BaseUrl}/${element}/${id}`)
       .then((response) => {
         console.log(response.data);
         setMessage("Deleted succesfully");

@@ -13,7 +13,7 @@ const ViewMui = ({ element, id }) => {
   tokenInterceptor();
 
   const fetchView = () => {
-    Axios.get(`http://${BaseUrl}/${element}`).then((response) => {
+    Axios.get(`${BaseUrl}/${element}`).then((response) => {
       setView(response.data);
     });
   };

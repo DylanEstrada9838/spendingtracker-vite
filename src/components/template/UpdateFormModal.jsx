@@ -28,7 +28,7 @@ export default function UpdateFormModal({element,fn,id}) {
     e.preventDefault();
     
     Axios.put(
-      `http://${BaseUrl}/${element}/${id}`,
+      `${BaseUrl}/${element}/${id}`,
       { name: name },
     )
       .then((response) => {

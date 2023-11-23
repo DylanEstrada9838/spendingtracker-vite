@@ -36,7 +36,7 @@ export default function SignUp() {
     e.preventDefault();
 
     axios.post(
-      `http://${BaseUrl}/users`,
+      `${BaseUrl}/users`,
       { email:email,username: name,password:password },
     )
       .then((response) => {

@@ -1,3 +1,3 @@
-const BaseUrl = "bedureactapis.alwaysdata.net"
+const BaseUrl = "https://bedureactapis.alwaysdata.net"
 
 export default BaseUrl;

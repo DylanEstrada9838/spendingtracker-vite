@@ -48,7 +48,7 @@ export default function CreateFormModal({ element, fn }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    Axios.post(`http://${BaseUrl}/${element}`, {
+    Axios.post(`${BaseUrl}/${element}`, {
       amount: amount,
       description: description,
       date:date,
@@ -76,14 +76,14 @@ export default function CreateFormModal({ element, fn }) {
   };
 
   const fetchView = () => {
-    Axios.get(`http://${BaseUrl}/category`)
+    Axios.get(`${BaseUrl}/category`)
       .then((response) => {
         setCategories(response.data);
       })
       .catch((error) => {
         console.error("Error fetching categories:", error);
       });
-    Axios.get(`http://${BaseUrl}/method`)
+    Axios.get(`${BaseUrl}/method`)
       .then((response) => {
         setMethods(response.data);
       })
