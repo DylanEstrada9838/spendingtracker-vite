@@ -6,16 +6,21 @@ import "../../styles/ViewMui.css";
 import tokenInterceptor from "../../functions/tokenInterceptor";
 import CreateModal from "./CreateModal";
 import BaseUrl from '../../functions/baseUrl';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const ViewMui = ({ element, id }) => {
   const [view, setView] = useState([]);
-
+  const [loading,setLoading] = useState(false);
   tokenInterceptor();
 
   const fetchView = () => {
     Axios.get(`${BaseUrl}/${element}`,)
     .then((response) => {
-      setView(response.data);
+      
+        setView(response.data);
+        setLoading(true); // Set loading to false when data is fetched
+      
+      
     });
   };
 
@@ -27,10 +32,10 @@ const ViewMui = ({ element, id }) => {
    <div class="view-mui">
       <CreateModal element={element}/>
       
-        <TableScrollable
+        {loading ?<TableScrollable
           element={element}
           rows={view.map((item) => ({ id: item.id, [element]: item.name }))}
-        />
+        />:<CircularProgress sx={{display:"flex",margin:"0 auto"}}/>}
       </div>
     
   );

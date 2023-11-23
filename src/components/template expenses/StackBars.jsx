@@ -8,12 +8,15 @@ import { TextField, MenuItem } from "@mui/material";
 import CardInvertedColors from "../Paper";
 import PieChartExpense from "./PieChart";
 import BaseUrl from '../../functions/baseUrl';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function StackedBarChart({ element }) {
   const [view, setView] = useState([]);
   const [year, setYear] = useState(dayjs().year());
   const [total,setTotal] = useState("");
   const [PieChart,setPieChart] = useState([])
+  const [loading,setLoading] = useState(false);
+
   const handleChange = (e) => {
     setYear(e.target.value);
     console.log(year);
@@ -25,6 +28,7 @@ export default function StackedBarChart({ element }) {
     Axios.get(`${BaseUrl}/expense/${element}/month/${year}`, {}).then(
       (response) => {
         setView(response.data);
+        setLoading(true);
       }
     );
 
@@ -89,7 +93,7 @@ export default function StackedBarChart({ element }) {
   const { series, xLabels } = extractData();
 
   return (
-    <div style={{display:"flex",alignItems:"flex-start"}}>
+     loading ?<div style={{display:"flex",alignItems:"flex-start"}}>
       <TextField
         id="year"
         select
@@ -117,6 +121,7 @@ export default function StackedBarChart({ element }) {
           xAxis={[{ data: xLabels, scaleType: "band" }]}
         />
       
-    </div>
+    </div>:<CircularProgress sx={{display:"flex",margin:"0 auto"}}/>
+        
   );
 }
