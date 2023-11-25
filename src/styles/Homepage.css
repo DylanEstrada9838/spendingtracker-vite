@@ -1,0 +1,33 @@
+
+.home{
+    /* Animation styles go here */
+    animation: your-animation 1s ease-in-out;
+  }
+  
+  @keyframes your-animation {
+    /* Define your animation keyframes here */
+    from {
+     opacity:0
+    }
+    to {
+      opacity:100
+    }
+  }
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 80%;
+      
+    }
+  }
+  
+  .typing-text {
+    overflow: hidden;
+    border-right: 0.1em solid; /* You can adjust the border style as needed */
+    white-space: nowrap;
+    margin: 0 auto;
+    font-size: 1.5em; /* Adjust the font size as needed */
+    animation: typing 2s steps(20, end) 1; /* Set animation-iteration-count to 1 */
+  }

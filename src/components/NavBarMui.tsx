@@ -8,12 +8,19 @@ import logout from "../functions/logout";
 import { useNavigate } from "react-router-dom";
 import { ThemeProvider } from '@mui/material/styles';
 import OrangeTheme from "../themes/OrangeTheme";
+import BarChartIcon from '@mui/icons-material/BarChart';
+import CategoryIcon from '@mui/icons-material/Category';
+import LocalAtmIcon from '@mui/icons-material/LocalAtm';
+import AddCardIcon from '@mui/icons-material/AddCard';
+import QueryStatsIcon from '@mui/icons-material/QueryStats';
 
 const links = ["expense", "category", "method","dashboard"];
 const pages = ["Expenses", "Categories", "Methods","Dashboard"];
+const icons = [<LocalAtmIcon sx={{fontSize: 30}}/>,<CategoryIcon sx={{fontSize: 30}}/>,<AddCardIcon sx={{fontSize: 30}}/>,<BarChartIcon sx={{fontSize: 30}}/>]
 const settings = ["Account", "Logout"];
 
 function ResponsiveAppBar() {
+  
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -39,7 +46,7 @@ function ResponsiveAppBar() {
     // Call the logout function when the user logs out
     logout();
 
-    navigate("/sign-in");
+    navigate("/");
     location.reload();
   };
 
@@ -48,8 +55,8 @@ function ResponsiveAppBar() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <PaymentsIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Link to="/">
+          
+          <Link to="/home">
             <Typography
               variant="h6"
               noWrap
@@ -64,7 +71,7 @@ function ResponsiveAppBar() {
                 textDecoration: "none",
               }}
             >
-              ExpenseTracker
+              ExpenseTracker < QueryStatsIcon sx={{fontSize:30, display: { xs: "none", md: "flex" }, mr: 1 }} />
             </Typography>
           </Link>
 
@@ -97,9 +104,10 @@ function ResponsiveAppBar() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
+              {pages.map((page,index) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Link to={`/${links[pages.indexOf(page)]}`}>
+                  <Link to={`/${links[index]}`}>
+                  
                     <Typography
                       style={{ color: "black" }}
                       textAlign="center"
@@ -118,7 +126,7 @@ function ResponsiveAppBar() {
               variant="h5"
               noWrap
               component="a"
-              href="#app-bar-with-responsive-menu"
+              
               sx={{
                 mr: 2,
                 display: { xs: "flex", md: "none" },
@@ -135,17 +143,21 @@ function ResponsiveAppBar() {
           </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
+            {pages.map((page,index) => (
+              
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{ my: 2, color: "white", display: "flex", alignItems:"center",justifyContent:"center",gap:"2em"}}
+                
               >
                 <Link
                   style={{ color: "white" }}
-                  to={`/${links[pages.indexOf(page)]}`}
+                  to={`/${links[index]}`}
                 >
-                  {page}
+                 
+                   {icons[index]} {page}
+                
                 </Link>
               </Button>
             ))}
@@ -154,7 +166,7 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <AccountCircle fontSize="large"/>
+                <AccountCircle fontSize="large" color="info"/>
               </IconButton>
             </Tooltip>
             <Menu

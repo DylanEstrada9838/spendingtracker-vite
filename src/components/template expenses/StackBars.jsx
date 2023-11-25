@@ -93,7 +93,7 @@ export default function StackedBarChart({ element }) {
   const { series, xLabels } = extractData();
 
   return (
-     loading ?<div style={{display:"flex",alignItems:"flex-start"}}>
+     loading ?<div style={{display:"flex",alignItems:"flex-start",background:"white",padding:"20px",borderRadius:"20px"}}>
       <TextField
         id="year"
         select
@@ -115,9 +115,9 @@ export default function StackedBarChart({ element }) {
           <PieChartExpense element={element} id={"CategoryId"} value="totalAmount" year={year} data={PieChart}/> 
         </div>
         <BarChart
-          width={1000}
+          width={910}
           height={500}
-          series={series}
+          series={series.reverse()}
           xAxis={[{ data: xLabels, scaleType: "band" }]}
         />
       

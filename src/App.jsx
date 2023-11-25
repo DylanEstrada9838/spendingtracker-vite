@@ -23,13 +23,14 @@ function App() {
         {logged() ? <ResponsiveAppBar /> : <ResponsiveAppBarOut />}
         <div>
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            
             <Route element={<PublicRoutes/>}>
+              <Route path="/" element={<HomePage />} />
               <Route path="/sign-up" element={<SignUpPage />} />
               <Route path="/sign-in" element={<SignInPage />} />
             </Route>
             <Route element={<PrivateRoutes />}>
-            <Route path="/HomePage" element={<HomePageIn />} />
+            <Route path="/home" element={<HomePageIn />} />
               <Route path="/category" element={<ViewCategoriesPage />} />
               <Route path="/method" element={<ViewMethodsPage />} />
               <Route path="/expense" element={<ViewExpensesPage />} />

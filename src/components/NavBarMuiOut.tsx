@@ -6,58 +6,56 @@ import Container from "@mui/material/Container";
 import PaymentsIcon from "@mui/icons-material/Payments";
 import { Link } from "react-router-dom";
 import OrangeTheme from "../themes/OrangeTheme";
-import { ThemeProvider } from '@mui/material/styles';
-
+import { ThemeProvider } from "@mui/material/styles";
+import { Box, IconButton, MenuItem, Tooltip, Button } from "@mui/material";
+import QueryStatsIcon from '@mui/icons-material/QueryStats';
 function ResponsiveAppBarOut() {
   return (
     <ThemeProvider theme={OrangeTheme}>
       <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <PaymentsIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Link to="/">
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              ExpenseTracker
-            </Typography>
-          </Link>
-          <Link to="/">
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              href="#app-bar-with-responsive-menu"
-              sx={{
-                mr: 2,
-                display: { xs: "flex", md: "none" },
-                flexGrow: 1,
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              ExpenseTracker
-            </Typography>
-          </Link>
-        </Toolbar>
-      </Container>
-    </AppBar>
+        <Container maxWidth="xl">
+          <Toolbar disableGutters sx={{display:"flex",justifyContent:"space-between"}}>
+            
+            <Link to="/">
+              < div style={{display:"flex",alignItems:"center"}}>
+                
+                <Typography
+                  variant="h6"
+                  noWrap
+                  component="a"
+                  sx={{
+                    mr: 2,
+                    display: { xs: "none", md: "flex" },
+                    fontFamily: "monospace",
+                    fontWeight: 700,
+                    letterSpacing: ".3rem",
+                    color: "inherit",
+                    textDecoration: "none",
+                  }}
+                >
+                  ExpenseTracker  <QueryStatsIcon sx={{ fontSize: 30,display: { xs: "none", md: "flex" }, ml: 1 }} />
+                </Typography>
+              </ div >
+            </Link>
+            <Box sx={{ flexGrow: 0}}>
+              <div style={{ display: "flex", gap: "1em" }}>
+                <Link to={`/sign-in`}>
+                  <Button variant="contained" color="info">
+                    Sign-In
+                  </Button>
+                </Link>
+                <Link to={`/sign-up`}>
+                  <Button variant="contained" color="info">
+                    Sign-Up
+                  </Button>
+                </Link>
+              </div>
+            </Box>
+            
+          </Toolbar>
+        </Container>
+      </AppBar>
     </ThemeProvider>
-    
   );
 }
 export default ResponsiveAppBarOut;
