@@ -11,7 +11,6 @@ import Typography from "@mui/joy/Typography";
 import Divider from "@mui/joy/Divider";
 import Card from "@mui/joy/Card";
 import bgimage from "../assets/solutions-expense-categories.jpg";
-import "../styles/HomePage.css";
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';

@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import MuiAlert from "@mui/material/Alert";
 import BaseUrl from "../../functions/baseUrl";
-import "../../styles/Homepage.css"
+
 
 export default function SignUp() {
   const [name, setName] = useState("");

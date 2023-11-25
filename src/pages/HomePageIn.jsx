@@ -15,7 +15,6 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import CategoryIcon from '@mui/icons-material/Category';
 import LocalAtmIcon from '@mui/icons-material/LocalAtm';
 import AddCardIcon from '@mui/icons-material/AddCard';
-import "../styles/HomePage.css";
 
 const HomePageIn = () => {
 

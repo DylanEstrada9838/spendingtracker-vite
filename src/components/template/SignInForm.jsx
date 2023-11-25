@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import MuiAlert from "@mui/material/Alert";
 import BaseUrl from "../../functions/baseUrl";
 import Card from "@mui/joy/Card";
-import "../../styles/Homepage.css"
+
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
