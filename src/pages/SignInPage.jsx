@@ -1,6 +1,6 @@
 import SignIn from "../components/template/SignInForm";
 import bgimage from "../assets/solutions-expense-categories.jpg"
-import "../styles/HomePage.css"
+
 
 
 const SignInPage = () => {
