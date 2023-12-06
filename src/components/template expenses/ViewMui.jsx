@@ -7,6 +7,7 @@ import tokenInterceptor from "../../functions/tokenInterceptor";
 import CreateModal from "./CreateModal";
 import BaseUrl from "../../functions/baseUrl";
 import CircularProgress from '@mui/material/CircularProgress';
+import bgimage from "../../assets/solutions-expense-categories.jpg";
 
 const ViewMui = ({ element, id }) => {
   const [view, setView] = useState([]);
@@ -26,9 +27,19 @@ const ViewMui = ({ element, id }) => {
   }, []);
 
   return (
-    <div>
-      
-      <div class="view-mui" >
+   
+      <div style={{
+        backgroundImage: `url(${bgimage})`,
+        backgroundSize: "cover",
+        minHeight: "100vh",
+        // Adjust as needed
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        gap:"2em",
+    
+      }} >
         <CreateModal element={element} class="buttonExpense" />
         {loading ?<TableScrollable
           element={element}
@@ -41,7 +52,7 @@ const ViewMui = ({ element, id }) => {
           }))}
         />:<CircularProgress sx={{display:"flex",margin:"0 auto"}}/>}
       </div>
-    </div>
+    
   );
 };
 

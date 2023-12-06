@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route,HashRouter } from "react-router-dom";
 import "./styles/App.css";
+import "./styles/HomePage.css";
 import ResponsiveAppBar from "./components/NavBarMui";
 import ViewCategoriesPage from "./pages/category/ViewCategoriesPage";
 import HomePage from "./pages/HomePage";

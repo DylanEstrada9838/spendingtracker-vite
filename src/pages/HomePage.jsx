@@ -11,9 +11,11 @@ import Typography from "@mui/joy/Typography";
 import Divider from "@mui/joy/Divider";
 import Card from "@mui/joy/Card";
 import bgimage from "../assets/solutions-expense-categories.jpg";
+import dsimage from "../assets/dashboard.png";
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import CardCover from '@mui/joy/CardCover';
 
 const HomePage = () => {
   return (
@@ -21,6 +23,7 @@ const HomePage = () => {
       style={{
         backgroundImage: `url(${bgimage})`,
         backgroundSize: "cover",
+        position:"relative",
         minHeight: "100vh", // Adjust as needed
         display: "flex",
         flexDirection: "column",
@@ -28,16 +31,17 @@ const HomePage = () => {
         alignItems: "center",
       }}
     >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" style={{position:"absolute",bottom:0,width:"100%",left:0}}><path fill="#fff" fillOpacity="1" d="M0,192L80,170.7C160,149,320,107,480,122.7C640,139,800,213,960,202.7C1120,192,1280,96,1360,48L1440,0L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path></svg>
       <Card
         className="home"
-        variant="outlined"
+        variant="filled"
         sx={{
           width: 1200,
           display: "flex",
           margin: "0 auto",
           height:800,
-          marginTop:8
-          
+          marginTop:8,
+          boxShadow: "0 0 5px rgba(255, 255, 255, 0.5)",
         }}
         size="lg"
         color="primary"
@@ -69,7 +73,7 @@ const HomePage = () => {
                   </StepIndicator>
                 }
               >
-                <Card variant="outlined">
+                <Card variant="outlined" >
                   <Typography level="h4" sx={{ color: "#1f2c61" }}>
                     Effortless Expense Tracking:
                   </Typography>
@@ -107,8 +111,15 @@ const HomePage = () => {
                 </Card>
               </Step>
             </Stepper>
+<Divider orientation="horizontal" />
+            <Card sx={{ minWidth: 1000,minHeight:"340px",margin:"0 auto"}}>
+              <CardCover >
+                <img src={dsimage}
+              loading="lazy"
+               alt=""/>
+              </CardCover>
 
-            <Divider orientation="horizontal" />
+            </Card>
           </CardContent>
         </CardContent>
         <CardActions>

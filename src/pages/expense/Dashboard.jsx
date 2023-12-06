@@ -12,7 +12,7 @@ const DashboardPage = () => {
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
-    }}x>
+    }}>
    
       <Container maxWidth="xl" sx={{display:"flex",alignItems:"center"}}>
         <StackedBarChart element={"category"} id={"CategoryId"}/>

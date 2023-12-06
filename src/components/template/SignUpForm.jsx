@@ -86,7 +86,7 @@ export default function SignUp() {
         border: "1px solid rgba(60, 79, 118, 0.5)",
         padding: "30px",
         borderRadius: "7px",
-        boxShadow: "0 0 5px rgba(0, 0, 0, 0.5)",
+        boxShadow: "0 0 5px rgba(255, 255, 255, 0.5)",
         background:"#FFFCFF",
         
       }}

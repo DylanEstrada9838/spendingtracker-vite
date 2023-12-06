@@ -44,9 +44,9 @@ export default function TableScrollable({ rows, element }) {
   };
 
   return (
-    <Paper className={"table.scrollable"}>
-      <TableContainer sx={{ maxHeight: 500 }}>
-        <Table stickyHeader aria-label="sticky table">
+    <Paper className={"table.scrollable home"}>
+      <TableContainer  sx={{ maxHeight: 500,minWidth:900,borderRadius:"50px" }}>
+        <Table stickyHeader aria-label="sticky table" sx={{borderRadius:"50px"}}>
           <TableHead>
             <TableRow>
               {columns.map((column) => (

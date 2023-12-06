@@ -30,8 +30,11 @@ const HomePageIn = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        position:"relative",
       }}>
-  <Card className="home" variant="outlined" sx={{ width: 1000,display:"flex",margin:"0 auto",marginTop:"2em" }} size="lg" color="primary" invertedColors>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" style={{position:"absolute",bottom:0,width:"100%",left:0}}><path fill="#fff" fill-opacity="1" d="M0,192L80,170.7C160,149,320,107,480,122.7C640,139,800,213,960,202.7C1120,192,1280,96,1360,48L1440,0L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path></svg>
+      
+  <Card className="home" variant="filled" sx={{ width: 1000,display:"flex",margin:"0 auto",marginTop:"2em" }} size="lg" color="primary" invertedColors>
         <CardContent orientation="horizontal">
        
         

@@ -93,7 +93,7 @@ export default function StackedBarChart({ element }) {
   const { series, xLabels } = extractData();
 
   return (
-     loading ?<div style={{display:"flex",alignItems:"flex-start",background:"white",padding:"20px",borderRadius:"20px"}}>
+     loading ?<div style={{display:"flex",alignItems:"flex-start",background:"white",padding:"20px",borderRadius:"20px", boxShadow: "inset 0 0 10px rgba(0, 0, 0, 0.5)"}}>
       <TextField
         id="year"
         select
