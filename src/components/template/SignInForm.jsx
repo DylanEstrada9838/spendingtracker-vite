@@ -1,52 +1,45 @@
 import * as React from "react";
-import { Fab, Button, Alert } from "@mui/material";
-import { Box, TextField, MenuItem, Snackbar } from "@mui/material";
+import { Fab, Button, FormHelperText, Typography } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import axios from "axios";
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import MuiAlert from "@mui/material/Alert";
 import BaseUrl from "../../functions/baseUrl";
-import Card from "@mui/joy/Card";
+import { useForm } from "react-hook-form";
+import { joiResolver } from "@hookform/resolvers/joi";
+import Joi from "joi";
 
+const schema = Joi.object({
+  email: Joi.string().email({ tlds: false }).required(),
+  password: Joi.string().min(5).required(),
+});
 
 export default function SignUp() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
-  const [isError, setIsError] = useState(false);
-  const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors, isSubmitting, isSubmitSuccessful },
+  } = useForm({
+    resolver: joiResolver(schema),
   });
-  const [open, setOpen] = React.useState(false);
 
   const navigate = useNavigate();
 
-  const handleChangeEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handleChangePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    axios
-      .post(`${BaseUrl}/auth`, { email: email, password: password })
+  const onSubmit = async (data) => {
+    console.log(data);
+    await axios
+      .post(`${BaseUrl}/auth`, { email: data.email, password: data.password })
       .then((response) => {
         const token = response.data.token;
         console.log(token);
 
         // Save the token to local storage
         localStorage.setItem("token", token);
-        setMessage("Logged in succesfully");
-        setIsError(false);
-        setOpen(true);
+
         setTimeout(function () {
-          navigate("/home"); // Refresh the page after the delay
+          navigate("/home"); 
           location.reload();
         }, 2000);
       })
@@ -54,62 +47,73 @@ export default function SignUp() {
         console.log(error);
         if (error.response.data.code === "ERR_AUTH") {
           console.log("Authentication Error:", error.response.data.message);
-          setMessage(error.response.data.message);
+          setError("root", {
+            message: error.response.data.message,
+          });
         } else if (error.response.data.code === "ERR_VALIDATION") {
-          // Check for specific validation error
           const validationError = error.response.data.details[0];
           console.log("Validation Error:", validationError.message);
-          setMessage(error.response.data.details[0].message);
-        }
 
-        setIsError(true);
-        setOpen(true);
-        setTimeout(function () {
-          setOpen(false);
-        }, 2000);
+          setError("root", {
+            message: error.response.data.details[0].message,
+          });
+        }
       });
   };
   return (
     <Box
-    className="home"
+      className="home"
       sx={{
         display: "flex",
-        width: "600px",
+        width:"600px",
         margin: "0 auto ",
         flexDirection: "column",
         alignItems: "center",
-        
+
         "& > :not(style)": { m: 1 },
         border: "1px solid rgba(60, 79, 118, 0.5)",
         padding: "30px",
         borderRadius: "7px",
         boxShadow: "0 0 5px rgba(255, 255, 255, 0.6)",
-        background:"#FFFCFF",
-       
+        background: "#FFFCFF",
       }}
     >
-      <h2>Sign In</h2>
+      <Typography variant="h4">SIGN IN</Typography>
       <Fab color="secondary" aria-label="edit">
         <LockIcon />
       </Fab>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)} style={{ width: "500px" }}>
+        <FormHelperText sx={{ color: "error.main" }}>
+          {errors.root ? errors.root.message : " "}
+        </FormHelperText>
+        <FormHelperText sx={{ color: "success.main" }}>
+          {isSubmitSuccessful ? "Authentication success. Logging in..." : " "}
+        </FormHelperText>
         <TextField
+          {...register("email")}
           fullWidth
           id="email"
           label="Email"
           margin="normal"
-          value={email}
-          onChange={handleChangeEmail}
+          helperText={
+            <FormHelperText sx={{ color: "error.main" }}>
+              {errors.email ? errors.email.message : " "}
+            </FormHelperText>
+          }
         />
         <TextField
+          {...register("password")}
           fullWidth
           id="password"
           label="Password"
           type="password"
           autoComplete="current-password"
           margin="normal"
-          value={password}
-          onChange={handleChangePassword}
+          helperText={
+            <FormHelperText sx={{ color: "error.main" }}>
+              {errors.password ? errors.password.message : " "}
+            </FormHelperText>
+          }
         />
         <Button
           fullWidth
@@ -117,26 +121,14 @@ export default function SignUp() {
           variant="contained"
           color="primary"
           type="submit"
-          sx={{marginTop:"1em"}}
+          sx={{ marginTop: "1em" }}
+          disabled={isSubmitting}
         >
           Sign In
         </Button>
       </form>
-      {isError ? (
-        <Snackbar open={open} autoHideDuration={6000}>
-          <Alert severity="error" sx={{ width: "100%" }}>
-            {message}
-          </Alert>
-        </Snackbar>
-      ) : (
-        <Snackbar open={open} autoHideDuration={6000}>
-          <Alert severity="success" sx={{ width: "100%" }}>
-            {message}
-          </Alert>
-        </Snackbar>
-      )}
       <Link to="/sign-up">
-        <p style={{ color: "blue" }}>Don't have an account? Sign-Up</p>
+        <p style={{ color: "blue" }}>Don`t have an account? Sign-Up</p>
       </Link>
     </Box>
   );

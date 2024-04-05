@@ -1,5 +1,14 @@
 import * as React from "react";
-import { Box, TextField, Fab, Button, Alert, Stack } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Fab,
+  Button,
+  Alert,
+  Stack,
+  Typography,
+  FormHelperText,
+} from "@mui/material";
 import { Snackbar } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import axios from "axios";
@@ -8,45 +17,45 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import MuiAlert from "@mui/material/Alert";
 import BaseUrl from "../../functions/baseUrl";
+import { useForm } from "react-hook-form";
+import { joiResolver } from "@hookform/resolvers/joi";
+import Joi from "joi";
 
+const schema = Joi.object({
+  email: Joi.string().email({ tlds: false }).required(),
+  username: Joi.string()
+    .min(5)
+    .max(20)
+    .regex(
+      /^[a-zA-Z0-9_]+$/,
+      "only contains letters, numbers and underscore (_)"
+    )
+    .required(),
+  password: Joi.string().min(5).required(),
+});
 
 export default function SignUp() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
-  const [isError, setIsError] = useState(false);
-
-  const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors, isSubmitting,isSubmitSuccessful },
+  } = useForm({
+    resolver: joiResolver(schema),
   });
-  const [open, setOpen] = React.useState(false);
-
-  const handleChangeEmail = (e) => {
-    setEmail(e.target.value);
-  };
-  const handleChangeUser = (e) => {
-    setName(e.target.value);
-  };
-  const handleChangePassword = (e) => {
-    setPassword(e.target.value);
-  };
 
   const navigate = useNavigate();
-  const handleSubmit = (e) => {
-    e.preventDefault();
 
-    axios
+  const onSubmit = async (data) => {
+    console.log(data);
+    await axios
       .post(`${BaseUrl}/users`, {
-        email: email,
-        username: name,
-        password: password,
+        email: data.email,
+        username: data.username,
+        password: data.password,
       })
       .then((response) => {
-        setMessage("Created succesfully");
-        setIsError(false);
-        setOpen(true);
-
+        console.log(response);
         setTimeout(function () {
           navigate("/sign-in"); // Refresh the page after the delay
         }, 2000);
@@ -58,24 +67,24 @@ export default function SignUp() {
           error.response.data.code === "ERR_USER"
         ) {
           console.log("Authentication Error:", error.response.data.message);
-          setMessage(error.response.data.message);
+          setError("root", {
+            message: error.response.data.message,
+          });
         } else if (error.response.data.code === "ERR_VALIDATION") {
           // Check for specific validation error
           const validationError = error.response.data.details[0];
           console.log("Validation Error:", validationError.message);
-          setMessage(error.response.data.details[0].message);
+          setError("root", {
+            message: error.response.data.details[0].message,
+          });
         }
 
-        setIsError(true);
-        setOpen(true);
-        setTimeout(function () {
-          setOpen(false); // Refresh the page after the delay
-        }, 2000);
+        setTimeout(function () {}, 2000);
       });
   };
   return (
     <Box
-    className="home"
+      className="home"
       sx={{
         display: "flex",
         width: "600px",
@@ -87,48 +96,66 @@ export default function SignUp() {
         padding: "30px",
         borderRadius: "7px",
         boxShadow: "0 0 5px rgba(255, 255, 255, 0.5)",
-        background:"#FFFCFF",
-        
+        background: "#FFFCFF",
       }}
     >
-      <h2>Sign Up</h2>
+      <Typography variant="h4">SIGN UP</Typography>
       <Fab color="secondary" aria-label="edit">
         <LockIcon />
       </Fab>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <FormHelperText sx={{ color: "error.main" }}>
+          {errors.root ? errors.root.message : " "}
+        </FormHelperText>
+        <FormHelperText sx={{ color: "success.main" }}>
+          {isSubmitSuccessful ? "Account created succesfully... Redirecting to Login":" "}
+        </FormHelperText>
         <TextField
+          {...register("email")}
           fullWidth
           id="email"
           label="Email"
           margin="normal"
-          value={email}
-          onChange={handleChangeEmail}
+          helperText={
+            <FormHelperText sx={{ color: "error.main" }}>
+              {errors.email ? errors.email.message : " "}
+            </FormHelperText>
+          }
         />
         <TextField
+          {...register("username")}
           fullWidth
           id="user"
           label="Username"
           margin="normal"
-          value={name}
-          onChange={handleChangeUser}
+          helperText={
+            <FormHelperText sx={{ color: "error.main" }}>
+              {errors.username ? errors.username.message : " "}
+            </FormHelperText>
+          }
         />
         <TextField
+          {...register("password")}
           fullWidth
           id="password"
           label="Password"
           type="password"
           autoComplete="current-password"
           margin="normal"
-          value={password}
-          onChange={handleChangePassword}
+          helperText={
+            <FormHelperText sx={{ color: "error.main" }}>
+              {errors.password ? errors.password.message : " "}
+            </FormHelperText>
+          }
         />
         <Button
           fullWidth
           margin="normal"
+          disabled={isSubmitting}
           variant="contained"
           color="primary"
           type="submit"
-          sx={{marginTop:"1em"}}
+          sx={{ marginTop: "1em" }}
         >
           Create Account
         </Button>
@@ -136,19 +163,6 @@ export default function SignUp() {
       <Link to="/sign-in">
         <p style={{ color: "blue" }}>Already have an account? Sign-In</p>
       </Link>
-      {isError ? (
-        <Snackbar open={open} autoHideDuration={6000}>
-          <Alert severity="error" sx={{ width: "100%" }}>
-            {message}
-          </Alert>
-        </Snackbar>
-      ) : (
-        <Snackbar open={open} autoHideDuration={6000}>
-          <Alert severity="success" sx={{ width: "100%" }}>
-            {message}
-          </Alert>
-        </Snackbar>
-      )}
     </Box>
   );
 }
